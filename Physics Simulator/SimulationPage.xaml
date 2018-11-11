@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Physics_Simulator.MainPage"
+    x:Class="Physics_Simulator.SimulationPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Physics_Simulator"
@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <!-- Once you start building this page you have to make it the main page again in App.xaml.cs -->
+
     </Grid>
 </Page>
