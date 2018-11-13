@@ -22,9 +22,14 @@ namespace Physics_Simulator
     /// </summary>
     public sealed partial class SimulationPage : Page
     {
+
+        private Engine simEngine;
+
         public SimulationPage()
         {
             this.InitializeComponent();
+
+            simEngine = new Engine();
         }
     }
 }
