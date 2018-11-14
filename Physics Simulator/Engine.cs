@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml.Media;
 
 namespace Physics_Simulator
 {
@@ -14,8 +15,8 @@ namespace Physics_Simulator
         private double interval;
         private double gravity;
 
-        private List<EngineBox> staticObjects;
-        private List<EngineBox> dynamicObjects;
+        private List<EngineBox> staticObjects = new List<EngineBox>();
+        private List<EngineBox> dynamicObjects = new List<EngineBox>();
 
         private double[] velocity;
 
@@ -50,6 +51,8 @@ namespace Physics_Simulator
             for (int i = 0; i < dynamicObjects.Count; i++)
             {
                 velocity[i] += gravity / interval;
+
+                dynamicObjects.ElementAt<EngineBox>(i).Move((velocity[i]/interval), 0);
             }
         }
     }
@@ -57,19 +60,20 @@ namespace Physics_Simulator
     class EngineBox
     {
         private Rectangle rect;
-        private int x;
-        private int y;
-        private int h;
-        private int w;
-        private int m;
+        private double x;
+        private double y;
+        private double h;
+        private double w;
+        private double m;
 
-        public EngineBox(int posX, int posY, int height, int width, int mass, Canvas canvas)
+        public EngineBox(double posX, double posY, double height, double width, double mass, Brush fill,  Canvas canvas)
         {
             rect = new Rectangle();
             rect.Height = height;
             rect.Width = width;
             rect.SetValue(Canvas.LeftProperty, x);
             rect.SetValue(Canvas.TopProperty, y);
+            rect.Fill = fill;
 
             canvas.Children.Add(rect);
 
@@ -80,7 +84,7 @@ namespace Physics_Simulator
             m = mass;
         }
 
-        public void Move(int dX, int dY)
+        public void Move(double dX, double dY)
         {
             x += dX;
             y += dY;
@@ -88,10 +92,45 @@ namespace Physics_Simulator
             rect.SetValue(Canvas.TopProperty, y);
         }
 
-        public int GetXPos() { return x; }
-        public int GetYPos() { return y; }
-        public int GetHeight() { return h; }
-        public int GetWidth() { return w; }
-        public int GetMass() { return m; }
+        public double GetXPos() { return x; }
+        public double GetYPos() { return y; }
+        public double GetHeight() { return h; }
+        public double GetWidth() { return w; }
+        public double GetMass() { return m; }
+    }
+
+    class Vector
+    {
+
+        double angle;
+        double mag;
+        double xVal;
+        double yVal;
+
+        public Vector(double magnitude, double angle, double x, double y)
+        {
+            if (mag == 0) // if given scalar
+            {
+                xVal = x;
+                yVal = y;
+                CalcVector();
+            }
+            else // if given vector
+            {
+                mag = magnitude;
+                this.angle = angle;
+                CalcScalar();
+            }
+        }
+
+        private void CalcVector()
+        {
+            // calc vector
+        }
+
+        private void CalcScalar()
+        {
+            // calc scalar
+        }
     }
 }

@@ -9,7 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Canvas x:Name="SimCanvas">
-        </Canvas>
+        <Border BorderThickness="5" BorderBrush="Black">
+            <Canvas x:Name="SimCanvas">
+            </Canvas>
+        </Border>
     </Grid>
 </Page>
