@@ -18,7 +18,7 @@ namespace Physics_Simulator
         private List<EngineBox> staticObjects = new List<EngineBox>();
         private List<EngineBox> dynamicObjects = new List<EngineBox>();
 
-        private double[] velocity;
+        private Vector[] velocity;
 
         // could add limits (box bouncing etc)
         public Engine(List<EngineBox> objects, double interval, double gravityA)
@@ -38,11 +38,11 @@ namespace Physics_Simulator
                 }
             }
 
-            velocity = new double[dynamicObjects.Count];
+            velocity = new Vector[dynamicObjects.Count];
 
             for (int i = 0; i < velocity.Length; i++)
             {
-                velocity[i] = 0;
+                velocity[i] = new Vector(0, 0, 0, 0);
             }
         }
 
@@ -50,9 +50,8 @@ namespace Physics_Simulator
         {
             for (int i = 0; i < dynamicObjects.Count; i++)
             {
-                velocity[i] += gravity / interval;
-
-                dynamicObjects.ElementAt<EngineBox>(i).Move((velocity[i]/interval), 0);
+                velocity[i].Add(0, 0, 0, gravity / interval);
+                dynamicObjects.ElementAt<EngineBox>(i).Move(velocity[i], interval);
             }
         }
     }
@@ -88,6 +87,14 @@ namespace Physics_Simulator
         {
             x += dX;
             y += dY;
+            rect.SetValue(Canvas.LeftProperty, x);
+            rect.SetValue(Canvas.TopProperty, y);
+        }
+
+        public void Move(Vector v, double interval)
+        {
+            x += v.getXValue() / interval;
+            y += v.getYValue() / interval;
             rect.SetValue(Canvas.LeftProperty, x);
             rect.SetValue(Canvas.TopProperty, y);
         }
@@ -133,6 +140,18 @@ namespace Physics_Simulator
         {
             xVal = mag * Math.Cos(angle);
             yVal = mag * Math.Sin(angle);
+        }
+
+        public void Add(Vector v)
+        {
+            xVal += v.getXValue();
+            yVal += v.getYValue();
+            CalcVector();
+        }
+
+        public void Add(double magnitude, double angle, double x, double y)
+        {
+            Add(new Vector(magnitude, angle, x, y));
         }
 
         public double getXValue() { return xVal; }
