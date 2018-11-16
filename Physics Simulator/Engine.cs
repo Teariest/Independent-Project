@@ -13,7 +13,7 @@ namespace Physics_Simulator
     class Engine
     {
         private double interval;
-        private double gravity;
+        private double g;
 
         private List<EngineBox> staticObjects = new List<EngineBox>();
         private List<EngineBox> dynamicObjects = new List<EngineBox>();
@@ -21,10 +21,16 @@ namespace Physics_Simulator
         private Vector[] velocity;
 
         // could add limits (box bouncing etc)
-        public Engine(List<EngineBox> objects, double interval, double gravityA)
+        /// <summary>
+        /// Represents a 2D physics simulator
+        /// </summary>
+        /// <param name="objects">List of all objects</param>
+        /// <param name="interval">Frames per seconds the simulation will run at</param>
+        /// <param name="g">Gravity in u/s/s</param>
+        public Engine(List<EngineBox> objects, int fps, double gravity)
         {
-            this.interval = interval;
-            gravity = gravityA;
+            interval = 1/fps;
+            g = gravity;
 
             foreach (EngineBox i in objects)
             {
@@ -50,7 +56,7 @@ namespace Physics_Simulator
         {
             for (int i = 0; i < dynamicObjects.Count; i++)
             {
-                velocity[i].Add(0, 0, 0, gravity / interval);
+                velocity[i].Add(0, 0, 0, g / interval);
                 dynamicObjects.ElementAt<EngineBox>(i).Move(velocity[i], interval);
             }
         }

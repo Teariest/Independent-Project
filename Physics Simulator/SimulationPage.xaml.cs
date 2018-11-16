@@ -18,11 +18,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Physics_Simulator
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    
     public sealed partial class SimulationPage : Page
     {
+
+        private int fps = 60; // Frames per second
 
         private DispatcherTimer timer;
 
@@ -36,12 +36,12 @@ namespace Physics_Simulator
 
             objects.Add(new EngineBox(100, 100, 20, 20, 1, new SolidColorBrush( Color.FromArgb(255,255,100,200)), SimCanvas));
 
-            simEngine = new Engine(objects, 1, 2);
+            simEngine = new Engine(objects, fps, 0);
 
             timer = new DispatcherTimer();
 
             timer.Tick += Dispatch;
-            timer.Interval = new TimeSpan(0,0,1);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, (1000 / fps));
             timer.Start();
             
         }
