@@ -125,12 +125,19 @@ namespace Physics_Simulator
 
         private void CalcVector()
         {
-            // calc vector
+            mag = Math.Sqrt(Math.Pow(xVal, 2) + Math.Pow(yVal, 2));
+            angle = Math.Acos(xVal/mag);
         }
 
         private void CalcScalar()
         {
-            // calc scalar
+            xVal = mag * Math.Cos(angle);
+            yVal = mag * Math.Sin(angle);
         }
+
+        public double getXValue() { return xVal; }
+        public double getYValue() { return yVal; }
+        public double getAngle() { return angle; }
+        public double getMagnitude() { return mag; }
     }
 }
