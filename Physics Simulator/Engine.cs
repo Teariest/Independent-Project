@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,8 @@ namespace Physics_Simulator
 {
     class Engine
     {
-        private double interval;
-        private double g;
+        private double fps; // frames per second
+        private double g; // in u/s/s
 
         private List<EngineBox> staticObjects = new List<EngineBox>();
         private List<EngineBox> dynamicObjects = new List<EngineBox>();
@@ -29,7 +30,7 @@ namespace Physics_Simulator
         /// <param name="g">Gravity in u/s/s</param>
         public Engine(List<EngineBox> objects, int fps, double gravity)
         {
-            interval = 1/fps;
+            this.fps = fps;
             g = gravity;
 
             foreach (EngineBox i in objects)
@@ -56,8 +57,8 @@ namespace Physics_Simulator
         {
             for (int i = 0; i < dynamicObjects.Count; i++)
             {
-                velocity[i].Add(0, 0, 0, g / interval);
-                dynamicObjects.ElementAt<EngineBox>(i).Move(velocity[i], interval);
+                velocity[i].Add(0, 0, 0, (g /fps));
+                dynamicObjects.ElementAt<EngineBox>(i).Move(velocity[i], fps);
             }
         }
     }
@@ -76,17 +77,17 @@ namespace Physics_Simulator
             rect = new Rectangle();
             rect.Height = height;
             rect.Width = width;
-            rect.SetValue(Canvas.LeftProperty, x);
-            rect.SetValue(Canvas.TopProperty, y);
             rect.Fill = fill;
-
-            canvas.Children.Add(rect);
 
             x = posX;
             y = posY;
             h = height;
             w = width;
             m = mass;
+
+            canvas.Children.Add(rect);
+            rect.SetValue(Canvas.LeftProperty, x);
+            rect.SetValue(Canvas.TopProperty, y);
         }
 
         public void Move(double dX, double dY)
@@ -97,10 +98,10 @@ namespace Physics_Simulator
             rect.SetValue(Canvas.TopProperty, y);
         }
 
-        public void Move(Vector v, double interval)
+        public void Move(Vector v, double fps)
         {
-            x += v.getXValue() / interval;
-            y += v.getYValue() / interval;
+            x += (v.getXValue() / fps);
+            y += (v.getYValue() / fps);
             rect.SetValue(Canvas.LeftProperty, x);
             rect.SetValue(Canvas.TopProperty, y);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Physics_Simulator
     {
 
         private int fps = 60; // Frames per second
+        private double g = 30;
 
         private DispatcherTimer timer;
 
@@ -36,12 +38,12 @@ namespace Physics_Simulator
 
             objects.Add(new EngineBox(100, 100, 20, 20, 1, new SolidColorBrush( Color.FromArgb(255,255,100,200)), SimCanvas));
 
-            simEngine = new Engine(objects, fps, 0);
+            simEngine = new Engine(objects, fps, g);
 
             timer = new DispatcherTimer();
 
             timer.Tick += Dispatch;
-            timer.Interval = new TimeSpan(0, 0, 0, 0, (1000 / fps));
+            timer.Interval = new TimeSpan(0, 0, 0, 0, (1000/fps));
             timer.Start();
             
         }
