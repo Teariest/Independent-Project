@@ -64,21 +64,26 @@ namespace Physics_Simulator
             double rightB = item.GetWidth() + leftB;
             double topB = item.GetYPos();
             double botB = item.GetHeight() + topB;
-
-            for (int i = 0; i < velocity.Length && i != j; i++)
+            
+            for (int i = 0; i < velocity.Length; i++)
             {
+                if (i == j) continue;
+
                 EngineBox subject = objects.ElementAt<EngineBox>(i);
 
                 double leftS = subject.GetXPos();
                 double rightS = subject.GetWidth() + leftS;
                 double topS = subject.GetYPos();
                 double botS = subject.GetHeight() + topS;
+                
+                bool overlapX = !(leftB > rightS || rightB < leftS);
+                bool overlapY = !(botB < topS || topB > botS);
 
-                if (leftB < rightS)
+                if (overlapX && overlapY) // if colision invert velocities [incorrect]
                 {
-
+                    velocity[i].Invert();
+                    velocity[j].Invert();
                 }
-                // compare then act appropriately
             }
         }
     }
