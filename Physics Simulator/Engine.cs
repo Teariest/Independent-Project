@@ -16,8 +16,7 @@ namespace Physics_Simulator
         private double fps; // frames per second
         private double g; // in u/s/s
 
-        private List<EngineBox> staticObjects = new List<EngineBox>();
-        private List<EngineBox> dynamicObjects = new List<EngineBox>();
+        private List<EngineBox> objects = new List<EngineBox>();
 
         private Vector[] velocity;
 
@@ -33,19 +32,9 @@ namespace Physics_Simulator
             this.fps = fps;
             g = gravity;
 
-            foreach (EngineBox i in objects)
-            {
-                if (i.GetMass() == 0)
-                {
-                    staticObjects.Add(i);
-                }
-                else
-                {
-                    dynamicObjects.Add(i);
-                }
-            }
+            this.objects = objects;
 
-            velocity = new Vector[dynamicObjects.Count];
+            velocity = new Vector[objects.Count];
 
             for (int i = 0; i < velocity.Length; i++)
             {
@@ -55,10 +44,41 @@ namespace Physics_Simulator
 
         public void ExecuteNext()
         {
-            for (int i = 0; i < dynamicObjects.Count; i++)
+            for (int i = 0; i < objects.Count; i++)
             {
+                EngineBox item = objects.ElementAt<EngineBox>(i);
+
+                if (item.GetMass() == 0)
+                    continue;
+
+                CheckColision(item, i);
+
                 velocity[i].Add(0, 0, 0, (g /fps));
-                dynamicObjects.ElementAt<EngineBox>(i).Move(velocity[i], fps);
+                item.Move(velocity[i], fps);
+            }
+        }
+
+        private void CheckColision(EngineBox item, int j)
+        {
+            double leftB = item.GetXPos();
+            double rightB = item.GetWidth() + leftB;
+            double topB = item.GetYPos();
+            double botB = item.GetHeight() + topB;
+
+            for (int i = 0; i < velocity.Length && i != j; i++)
+            {
+                EngineBox subject = objects.ElementAt<EngineBox>(i);
+
+                double leftS = subject.GetXPos();
+                double rightS = subject.GetWidth() + leftS;
+                double topS = subject.GetYPos();
+                double botS = subject.GetHeight() + topS;
+
+                if (leftB < rightS)
+                {
+
+                }
+                // compare then act appropriately
             }
         }
     }
@@ -159,6 +179,13 @@ namespace Physics_Simulator
         public void Add(double magnitude, double angle, double x, double y)
         {
             Add(new Vector(magnitude, angle, x, y));
+        }
+
+        public void Invert()
+        {
+            xVal = -xVal;
+            yVal = -yVal;
+            angle += angle > 0 ? -180 : 180;
         }
 
         public double getXValue() { return xVal; }

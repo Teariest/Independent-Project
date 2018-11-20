@@ -36,7 +36,8 @@ namespace Physics_Simulator
 
             List<EngineBox> objects = new List<EngineBox>();
 
-            objects.Add(new EngineBox(100, 100, 20, 20, 1, new SolidColorBrush( Color.FromArgb(255,255,100,200)), SimCanvas));
+            objects.Add(new EngineBox(100, 100, 20, 20, 1, new SolidColorBrush(Color.FromArgb(255, 255, 100, 200)), SimCanvas));
+            objects.Add(new EngineBox(50, 600, 10, 300, 0, new SolidColorBrush(Color.FromArgb(255, 100, 255, 255)), SimCanvas));
 
             simEngine = new Engine(objects, fps, g);
 
