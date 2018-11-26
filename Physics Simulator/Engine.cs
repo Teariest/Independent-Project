@@ -40,50 +40,53 @@ namespace Physics_Simulator
             {
                 velocity[i] = new Vector(0, 0, 0, 0);
             }
+
+            // Velocity
+            velocity[0] = new Vector(0, 0, 0, 100);
+            velocity[3] = new Vector(0, 0, -100, 50);
         }
 
         public void ExecuteNext()
         {
-            for (int i = 0; i < objects.Count; i++)
+            for (int itemInt = 0; itemInt < objects.Count; itemInt++)
             {
-                EngineBox item = objects.ElementAt<EngineBox>(i);
+                EngineBox item = objects.ElementAt<EngineBox>(itemInt);
 
                 if (item.GetMass() == 0)
                     continue;
-
-                CheckColision(item, i);
-
-                velocity[i].Add(0, 0, 0, (g /fps));
-                item.Move(velocity[i], fps);
-            }
-        }
-
-        private void CheckColision(EngineBox item, int j)
-        {
-            double leftB = item.GetXPos();
-            double rightB = item.GetWidth() + leftB;
-            double topB = item.GetYPos();
-            double botB = item.GetHeight() + topB;
-            
-            for (int i = 0; i < velocity.Length; i++)
-            {
-                if (i == j) continue;
-
-                EngineBox subject = objects.ElementAt<EngineBox>(i);
-
-                double leftS = subject.GetXPos();
-                double rightS = subject.GetWidth() + leftS;
-                double topS = subject.GetYPos();
-                double botS = subject.GetHeight() + topS;
                 
-                bool overlapX = !(leftB > rightS || rightB < leftS);
-                bool overlapY = !(botB < topS || topB > botS);
+                double leftB = item.GetXPos();
+                double rightB = item.GetWidth() + leftB;
+                double topB = item.GetYPos();
+                double botB = item.GetHeight() + topB;
 
-                if (overlapX && overlapY) // if colision invert velocities [incorrect]
+                for (int subjectInt = 0; subjectInt < velocity.Length; subjectInt++)
                 {
-                    velocity[i].Invert();
-                    velocity[j].Invert();
+                    if (subjectInt == itemInt) continue;
+
+                    EngineBox subject = objects.ElementAt<EngineBox>(subjectInt);
+
+                    double leftS = subject.GetXPos();
+                    double rightS = subject.GetWidth() + leftS;
+                    double topS = subject.GetYPos();
+                    double botS = subject.GetHeight() + topS;
+
+                    bool overlapX = !(leftB > rightS || rightB < leftS);
+                    bool overlapY = !(botB < topS || topB > botS);
+
+                    if (overlapX && overlapY)
+                    {
+
+                        double xFinalVelocity = ((velocity[subjectInt].getXValue() * subject.GetMass()) + (velocity[itemInt].getXValue() * item.GetMass())) / (subject.GetMass() + item.GetMass());
+                        double yFinalVelocity = ((velocity[subjectInt].getYValue() * subject.GetMass()) + (velocity[itemInt].getYValue() * item.GetMass())) / (subject.GetMass() + item.GetMass());
+
+                        velocity[itemInt] = new Vector(0, 0, xFinalVelocity, yFinalVelocity);
+                    }
                 }
+
+                // find a different way to do gravity
+                velocity[itemInt].Add(0, 0, 0, g);
+                item.Move(velocity[itemInt], fps);
             }
         }
     }

@@ -24,7 +24,7 @@ namespace Physics_Simulator
     {
 
         private int fps = 60; // Frames per second
-        private double g = 120;
+        private double g = 9;
 
         private DispatcherTimer timer;
 
@@ -37,8 +37,9 @@ namespace Physics_Simulator
             List<EngineBox> objects = new List<EngineBox>();
 
             objects.Add(new EngineBox(100, 100, 20, 20, 1, new SolidColorBrush(Color.FromArgb(255, 255, 100, 200)), SimCanvas));
-            objects.Add(new EngineBox(100, 300, 20, 20, 1, new SolidColorBrush(Color.FromArgb(255, 100, 100, 255)), SimCanvas));
+            objects.Add(new EngineBox(100, 150, 20, 20, 1, new SolidColorBrush(Color.FromArgb(255, 100, 100, 255)), SimCanvas));
             objects.Add(new EngineBox(50, 600, 10, 300, 0, new SolidColorBrush(Color.FromArgb(255, 100, 255, 255)), SimCanvas));
+            objects.Add(new EngineBox(200, 100, 10, 10, 1, new SolidColorBrush(Color.FromArgb(255, 100, 100, 255)), SimCanvas));
 
             simEngine = new Engine(objects, fps, g);
 
