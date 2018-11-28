@@ -66,12 +66,17 @@ namespace Physics_Simulator
         /// <summary>
         /// Move object by a certain vector
         /// </summary>
-        public void Move(Vector v, double fps)
+        public void Move(Vector v)
         {
             x += v.getXValue();
             y += v.getYValue();
             rect.SetValue(Canvas.LeftProperty, x);
             rect.SetValue(Canvas.TopProperty, y);
+        }
+
+        public void ReboundMove(Vector v, double fps)
+        {
+            // TODO : rebound object so that it is at impact point
         }
 
         /// <summary>

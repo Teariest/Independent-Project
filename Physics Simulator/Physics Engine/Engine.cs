@@ -39,43 +39,47 @@ namespace Physics_Simulator
         /// </summary>
         public void ExecuteNext()
         {
-            for (int itemInt = 0; itemInt < objects.Length; itemInt++)
+            
+            for (int itemInt = 0; itemInt < objects.Length; itemInt++) // Loop goes over every item, but ignores static objects
             {
                 EngineBox item = objects[itemInt];
-
-                if (item.GetMass() == 0)
-                    continue;
                 
+                // item boundaries
                 double leftB = item.GetXPos();
                 double rightB = item.GetWidth() + leftB;
                 double topB = item.GetYPos();
                 double botB = item.GetHeight() + topB;
 
-                for (int subjectInt = 0; subjectInt < velocity.Length; subjectInt++)
+                for (int subjectInt = itemInt+1; subjectInt < velocity.Length; subjectInt++) // Loop goes over every object after the target object
                 {
-                    if (subjectInt == itemInt) continue;
 
                     EngineBox subject = objects[subjectInt];
 
+                    // subject boundaries
                     double leftS = subject.GetXPos();
                     double rightS = subject.GetWidth() + leftS;
                     double topS = subject.GetYPos();
                     double botS = subject.GetHeight() + topS;
 
-                    bool overlapX = !(leftB > rightS || rightB < leftS);
-                    bool overlapY = !(botB < topS || topB > botS);
-
-                    if (overlapX && overlapY)
+                    if (leftB < rightS && rightB > leftS && topB < botS && botB > topS) // if there is overlap [rectangle]
                     {
+                        // re-bound
 
-                        double xFinalVelocity = ((velocity[subjectInt].getXValue() * subject.GetMass()) + (velocity[itemInt].getXValue() * item.GetMass())) / (subject.GetMass() + item.GetMass());
-                        double yFinalVelocity = ((velocity[subjectInt].getYValue() * subject.GetMass()) + (velocity[itemInt].getYValue() * item.GetMass())) / (subject.GetMass() + item.GetMass());
+                        item.ReboundMove(velocity[itemInt], fps);
+                        subject.ReboundMove(velocity[subjectInt], fps);
 
-                        velocity[itemInt] = new Vector(0, 0, xFinalVelocity, yFinalVelocity);
+                        // change velocities
+                        double nVX = (velocity[itemInt].getXValue() * item.GetMass() + velocity[subjectInt].getXValue() * subject.GetMass()) / (item.GetMass() + subject.GetMass()); // new x velocity
+                        double nVY = (velocity[itemInt].getYValue() * item.GetMass() + velocity[subjectInt].getYValue() * subject.GetMass()) / (item.GetMass() + subject.GetMass()); // new x velocity
+
+                        velocity[itemInt] = new Vector(0, 0, nVX, nVY);
+                        velocity[subjectInt] = new Vector(0, 0, nVX, nVY);
                     }
                 }
 
-                // find a different way to do gravity
+                if (item.GetMass() == 0) // do not affect static objects
+                    continue;
+                 
                 velocity[itemInt].Add(0, 0, 0, g);
                 item.Move(velocity[itemInt], fps);
             }

@@ -24,7 +24,7 @@ namespace Physics_Simulator
     {
 
         private int fps = 60; // Frames per second
-        private double g = 9; // Gravity of simulation
+        private double g = 0.3; // Gravity of simulation
 
         private DispatcherTimer timer; // Timer that requests engine to calculate and move objects at every interval
 
@@ -39,14 +39,14 @@ namespace Physics_Simulator
             EngineBox[] objects = new EngineBox[4];
             objects[0] = new EngineBox(100, 100, 20, 20, 1, new SolidColorBrush(Color.FromArgb(255, 255, 100, 200)), SimCanvas);
             objects[1] = new EngineBox(100, 150, 20, 20, 1, new SolidColorBrush(Color.FromArgb(255, 100, 100, 255)), SimCanvas);
-            objects[2] = new EngineBox(50, 600, 10, 300, 0, new SolidColorBrush(Color.FromArgb(255, 100, 255, 255)), SimCanvas);
+            objects[2] = new EngineBox(50, 200, 10, 300, 0, new SolidColorBrush(Color.FromArgb(255, 100, 255, 255)), SimCanvas);
             objects[3] = new EngineBox(200, 100, 10, 10, 1, new SolidColorBrush(Color.FromArgb(255, 100, 100, 255)), SimCanvas);
 
             Vector[] vectors = new Vector[4];
             vectors[0] = new Vector(0, 0, 0, 0);
             vectors[1] = new Vector(0, 0, 0, 0);
             vectors[2] = new Vector(0, 0, 0, 0);
-            vectors[3] = new Vector(0, 0, 0, 0);
+            vectors[3] = new Vector(0, 0, -3, 0);
 
             // Build Engine
             simEngine = new Engine(objects, vectors, fps, g);
