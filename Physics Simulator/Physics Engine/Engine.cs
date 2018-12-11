@@ -32,13 +32,22 @@ namespace Physics_Simulator {
         public void ExecuteNext() {
 
             Vector[] newV = new Vector[velocity.Length];
+            Vector[] rebound = new Vector[velocity.Length];
             
             for (int i = 0; i < objects.Length; i++) { // change velocities
 
                 for (int j = 0; j < objects.Length; j++) {
 
+                    if (i == j) // do not check yourself
+                        continue;
+
+                    double distSqrd = Math.Pow(Diff(objects[i].GetXPos(), objects[j].GetXPos()), 2) + Math.Pow(Diff(objects[i].GetYPos(), objects[j].GetYPos()), 2);
+                    double minDistSqrd = Math.Pow(objects[i].GetRadius() + objects[j].GetRadius(), 2);
+                    Debug.WriteLine("I: {2}, Dist:{0}, Min Dist:{1}", distSqrd, minDistSqrd, i);
                     // Collisions
-                    if ((Math.Pow(objects[i].GetXPos() - objects[j].GetXPos(), 2) + Math.Pow(objects[i].GetYPos() - objects[j].GetYPos(), 2)) <= ((Math.Pow((objects[i].GetRadius() + objects[j].GetRadius()), 2)))) {
+                    if (distSqrd <= minDistSqrd) {
+
+                        Debug.WriteLine("Collision");
 
                         double ma = objects[i].GetMass();
                         Vector va = velocity[i];
@@ -50,6 +59,8 @@ namespace Physics_Simulator {
                         double yv = (ma * va.getYValue() + mb * vb.getYValue() + mb * e * (vb.getYValue() - va.getYValue())) / (ma + mb);
 
                         newV[i] = new Vector(0, 0, xv, yv);
+                        rebound[i] = new Vector(Math.Atan2(objects[i].GetXPos() - objects[j].GetXPos(), objects[i].GetYPos() - objects[j].GetYPos()), Math.Sqrt(distSqrd) - Math.Sqrt(minDistSqrd), 0, 0);
+                        //Debug.WriteLine("Rebound for {0}, X:{1}, Y:{2}", i, rebound[i].getXValue(), rebound[i].getYValue());
                     }
                 }
             }
@@ -58,12 +69,17 @@ namespace Physics_Simulator {
 
             for (int i = 0; i < objects.Length; i++) { // update positions
 
-                objects[i].Move((velocity[i].getXValue() * tInt), (velocity[i].getYValue() * tInt));
+                objects[i].Move(((velocity[i].getXValue() + rebound[i].getXValue()) * tInt), ((velocity[i].getYValue() + rebound[i].getYValue()) * tInt)); // error
             }
         }
 
         public EngineCircle[] Positions() {
             return objects;
+        }
+
+        // Returns difference between two numbers
+        public double Diff(double num1, double num2) {
+            return num1 > num2 ? num1 - num2 : num2 - num1;
         }
     }
 }

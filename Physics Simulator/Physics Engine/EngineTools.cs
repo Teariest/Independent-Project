@@ -74,7 +74,7 @@ namespace Physics_Simulator {
         /// </summary>
         public Vector(double magnitude, double angle, double x, double y) {
 
-            if (mag == 0) // if given scalar
+            if (mag == 0) // if given scalars
             {
                 xVal = x;
                 yVal = y;
