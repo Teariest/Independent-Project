@@ -6,27 +6,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Physics_Simulator
-{
-    class Engine
-    {
-        private double fps; // frames per second
+namespace Physics_Simulator {
+    
+    class Engine {
+
+        private double tInt; // time interval in seconds
         private double g; // in u/s/s
 
-        private EngineBox[] objects; // All objects within simulation, each with a unique index
-
+        private EngineCircle[] objects; // All objects within simulation, each with a unique index
         private Vector[] velocity; // Velocities per object, same index as reference object's index within 'objects'
 
-        /// <summary>
-        /// Setup Engine and fields
-        /// </summary>
-        /// <param name="objects">List of objects used by Engine</param>
-        /// <param name="fps">Frames per second simulation will be running at</param>
-        /// <param name="gravity">Simulation Gravity</param>
-        /// <param name="startV">Velocities that each object should start with</param>
-        public Engine(EngineBox[] objects, Vector[] startV, int fps, double gravity)
-        {
-            this.fps = fps;
+        
+        public Engine(EngineCircle[] objects, Vector[] startV, int fps, double gravity) {
+            this.tInt = 1.0/fps;
             g = gravity;
 
             this.objects = objects;
@@ -37,52 +29,41 @@ namespace Physics_Simulator
         /// <summary>
         /// Calculate physics and move all objects accordingly over pre-determined amount of time
         /// </summary>
-        public void ExecuteNext()
-        {
+        public void ExecuteNext() {
+
+            Vector[] newV = new Vector[velocity.Length];
             
-            for (int itemInt = 0; itemInt < objects.Length; itemInt++) // Loop goes over every item, but ignores static objects
-            {
-                EngineBox item = objects[itemInt];
-                
-                // item boundaries
-                double leftB = item.GetXPos();
-                double rightB = item.GetWidth() + leftB;
-                double topB = item.GetYPos();
-                double botB = item.GetHeight() + topB;
+            for (int i = 0; i < objects.Length; i++) { // change velocities
 
-                for (int subjectInt = itemInt+1; subjectInt < velocity.Length; subjectInt++) // Loop goes over every object after the target object
-                {
+                for (int j = 0; j < objects.Length; j++) {
 
-                    EngineBox subject = objects[subjectInt];
+                    // Collisions
+                    if ((Math.Pow(objects[i].GetXPos() - objects[j].GetXPos(), 2) + Math.Pow(objects[i].GetYPos() - objects[j].GetYPos(), 2)) <= ((Math.Pow((objects[i].GetRadius() + objects[j].GetRadius()), 2)))) {
 
-                    // subject boundaries
-                    double leftS = subject.GetXPos();
-                    double rightS = subject.GetWidth() + leftS;
-                    double topS = subject.GetYPos();
-                    double botS = subject.GetHeight() + topS;
+                        double ma = objects[i].GetMass();
+                        Vector va = velocity[i];
+                        double mb = objects[j].GetMass();
+                        Vector vb = velocity[j];
+                        double e = objects[i].GetElasticity();
 
-                    if (leftB < rightS && rightB > leftS && topB < botS && botB > topS) // if there is overlap [rectangle]
-                    {
-                        // re-bound
+                        double xv = (ma * va.getXValue() + mb * vb.getXValue() + mb * e * (vb.getXValue() - va.getXValue())) / (ma + mb);
+                        double yv = (ma * va.getYValue() + mb * vb.getYValue() + mb * e * (vb.getYValue() - va.getYValue())) / (ma + mb);
 
-                        item.ReboundMove(velocity[itemInt], fps);
-                        subject.ReboundMove(velocity[subjectInt], fps);
-
-                        // change velocities
-                        double nVX = (velocity[itemInt].getXValue() * item.GetMass() + velocity[subjectInt].getXValue() * subject.GetMass()) / (item.GetMass() + subject.GetMass()); // new x velocity
-                        double nVY = (velocity[itemInt].getYValue() * item.GetMass() + velocity[subjectInt].getYValue() * subject.GetMass()) / (item.GetMass() + subject.GetMass()); // new x velocity
-
-                        velocity[itemInt] = new Vector(0, 0, nVX, nVY);
-                        velocity[subjectInt] = new Vector(0, 0, nVX, nVY);
+                        newV[i] = new Vector(0, 0, xv, yv);
                     }
                 }
-
-                if (item.GetMass() == 0) // do not affect static objects
-                    continue;
-                 
-                velocity[itemInt].Add(0, 0, 0, g);
-                item.Move(velocity[itemInt], fps);
             }
+
+            velocity = newV;
+
+            for (int i = 0; i < objects.Length; i++) { // update positions
+
+                objects[i].Move((velocity[i].getXValue() * tInt), (velocity[i].getYValue() * tInt));
+            }
+        }
+
+        public EngineCircle[] Positions() {
+            return objects;
         }
     }
 }

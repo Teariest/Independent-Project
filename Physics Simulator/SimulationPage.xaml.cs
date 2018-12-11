@@ -13,15 +13,18 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Physics_Simulator
-{
-    
-    public sealed partial class SimulationPage : Page
-    {
+
+namespace Physics_Simulator {
+
+    public sealed partial class SimulationPage : Page {
+
+        private Ellipse[] UIObjects; // Visual Representations of object
+        private EngineCircle[] eObjects; // Engine Objects
+        private Vector[] vectors;
 
         private int fps = 60; // Frames per second
         private double g = 0.3; // Gravity of simulation
@@ -30,43 +33,67 @@ namespace Physics_Simulator
 
         private Engine simEngine; // Physics Engine
 
-        public SimulationPage()
-        {
+        public SimulationPage() {
             this.InitializeComponent();
 
+            int numObjects = 8;
+            UIObjects = new Ellipse[numObjects];
+            eObjects = new EngineCircle[numObjects];
+            vectors = new Vector[numObjects];
 
-            // Objects and their Starting velocities to be passed on to Engine
-            EngineBox[] objects = new EngineBox[4];
-            objects[0] = new EngineBox(100, 100, 20, 20, 1, new SolidColorBrush(Color.FromArgb(255, 255, 100, 200)), SimCanvas);
-            objects[1] = new EngineBox(100, 150, 20, 20, 1, new SolidColorBrush(Color.FromArgb(255, 100, 100, 255)), SimCanvas);
-            objects[2] = new EngineBox(50, 200, 10, 300, 0, new SolidColorBrush(Color.FromArgb(255, 100, 255, 255)), SimCanvas);
-            objects[3] = new EngineBox(200, 100, 10, 10, 1, new SolidColorBrush(Color.FromArgb(255, 100, 100, 255)), SimCanvas);
+            // Set up all objects
 
-            Vector[] vectors = new Vector[4];
-            vectors[0] = new Vector(0, 0, 0, 0);
-            vectors[1] = new Vector(0, 0, 0, 0);
-            vectors[2] = new Vector(0, 0, 0, 0);
-            vectors[3] = new Vector(0, 0, -3, 0);
+            BuildEllipse(0, 10, 10, 2, 255, 250, 100, 0, 0, 0, 10, 0, 2, 1);
+            BuildEllipse(1, 20, 10, 2, 255, 0, 250, 100, 0, 0, 0, 0, 2, 1);
+            BuildEllipse(2, 10, 20, 2, 255, 0, 100, 250, 0, 0, 10, 0, 2, 2);
+            BuildEllipse(3, 20, 20, 2, 255, 100, 250, 0, 0, 0, 0, 0, 2, 2);
+            BuildEllipse(4, 10, 30, 2, 255, 100, 0, 250, 0, 0, 10, 0, 2, 0.5);
+            BuildEllipse(5, 20, 30, 2, 255, 100, 200, 100, 0, 0, 0, 0, 2, 0.5);
+            BuildEllipse(6, 10, 40, 2, 255, 200, 100, 100, 0, 0, 10, 0, 2, 0);
+            BuildEllipse(7, 20, 40, 2, 255, 100, 100, 200, 0, 0, 0, 0, 2, 0);
+
 
             // Build Engine
-            simEngine = new Engine(objects, vectors, fps, g);
+            simEngine = new Engine(eObjects, vectors, fps, g);
 
             // Build Dispatcher
             timer = new DispatcherTimer();
             timer.Tick += Dispatch;
-            timer.Interval = new TimeSpan(0, 0, 0, 0, (1000/fps));
+            timer.Interval = new TimeSpan(0, 0, 0, 0, (1000 / fps));
             timer.Start();
-            
+
         }
 
         /// <summary>
         /// Runs once for every frame, changes everything that has to be changed during the frame
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Dispatch(object sender, object e)
-        {
+        private void Dispatch(object sender, object e) {
             simEngine.ExecuteNext();
+            RefreshDisplay();
+        }
+
+        private void RefreshDisplay() {
+            EngineCircle[] pos = simEngine.Positions();
+
+            for (int i = 0; i < pos.Length; i++) {
+                UIObjects[i].SetValue(Canvas.LeftProperty, (pos[i].GetXPos() - pos[i].GetRadius()) * 10);
+                UIObjects[i].SetValue(Canvas.TopProperty, (pos[i].GetYPos() - pos[i].GetRadius()) * 10);
+            }
+        }
+
+        /// <summary>
+        /// Variables are in meters, meters per second and degrees
+        /// </summary>
+        public void BuildEllipse(int index, double xPos, double yPos, double radius, byte a, byte r, byte g, byte b, double magnitude, double angle, double xV, double yV, double mass, double elasticity) {
+            UIObjects[index] = new Ellipse();
+            UIObjects[index].Height = radius*20;
+            UIObjects[index].Width = radius*20;
+            UIObjects[index].Fill = new SolidColorBrush(Color.FromArgb(a, r, g, b));
+            SimCanvas.Children.Add(UIObjects[index]);
+            UIObjects[index].SetValue(Canvas.LeftProperty, (xPos-radius)*10);
+            UIObjects[index].SetValue(Canvas.TopProperty, (yPos-radius)*10);
+            eObjects[index] = new EngineCircle(xPos, yPos, radius, mass, elasticity);
+            vectors[index] = new Vector(magnitude, angle, xV, yV);
         }
     }
 }
