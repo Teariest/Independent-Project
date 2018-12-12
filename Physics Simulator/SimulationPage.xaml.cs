@@ -42,18 +42,19 @@ namespace Physics_Simulator {
             vectors = new Vector[numObjects];
 
             // Set up all objects
+            //           i   x   y   r  a    r    g    b    0  v  vx  vy  m  e
+            BuildEllipse(00, 10, 05, 2, 255, 000, 000, 000, 0, 0, 10, 00, 1, 1.0); // constant
+            BuildEllipse(01, 10, 10, 2, 255, 250, 000, 000, 0, 0, 10, 00, 1, 0.0); // 0 elasticity
+            BuildEllipse(02, 20, 10, 2, 255, 250, 000, 000, 0, 0, 00, 00, 1, 0.0);
+            BuildEllipse(03, 10, 20, 2, 255, 000, 250, 000, 0, 0, 10, 00, 1, 0.5); // 0.5 elasticity
+            BuildEllipse(04, 20, 20, 2, 255, 000, 250, 000, 0, 0, 00, 00, 1, 0.5);
+            BuildEllipse(05, 10, 30, 2, 255, 000, 000, 250, 0, 0, 10, 00, 1, 1.0); // 1 elasticity
+            BuildEllipse(06, 20, 30, 2, 255, 000, 000, 250, 0, 0, 00, 00, 1, 1.0);
+            BuildEllipse(07, 10, 40, 2, 255, 000, 250, 250, 0, 0, 10, 00, 1, 2.0); // 2 elasticity
+            BuildEllipse(08, 20, 40, 2, 255, 000, 250, 250, 0, 0, 00, 00, 1, 2.0);
+            BuildEllipse(09, 10, 50, 2, 255, 250, 250, 000, 0, 0, 10, 10, 1, 1.0); // 3 diagonal
+            BuildEllipse(10, 20, 60, 2, 255, 250, 250, 000, 0, 0, 00, 00, 1, 1.0);
 
-            BuildEllipse(0, 10, 10, 2, 255, 250, 100, 0, 0, 0, 10, 0, 2, 1);
-            BuildEllipse(1, 20, 10, 2, 255, 0, 250, 100, 0, 0, 0, 0, 2, 1);
-            BuildEllipse(2, 10, 20, 2, 255, 0, 100, 250, 0, 0, 10, 0, 2, 2);
-            BuildEllipse(3, 20, 20, 2, 255, 100, 250, 0, 0, 0, 0, 0, 2, 2);
-            BuildEllipse(4, 10, 30, 2, 255, 100, 0, 250, 0, 0, 10, 0, 2, 0.5);
-            BuildEllipse(5, 20, 30, 2, 255, 100, 200, 100, 0, 0, 0, 0, 2, 0.5);
-            BuildEllipse(6, 10, 40, 2, 255, 200, 100, 100, 0, 0, 10, 0, 2, 0);
-            BuildEllipse(7, 20, 40, 2, 255, 100, 100, 200, 0, 0, 0, 0, 2, 0);
-            BuildEllipse(8, 10, 50, 2, 255, 0, 0, 0, 0, 0, 10, 0, 2, 0);
-            BuildEllipse(9, 10, 60, 2, 255, 200, 150, 50, 500, 0, 10, 0, 1, 1);
-            BuildEllipse(10, 20, 60, 2, 255, 50, 50, 60, 0, 0, 0, 0, 1, 1);
             // | CHANGE SIZE OF ARRAY WHEN ADDING OR REMOVING OBJECT |
 
             // Build Engine

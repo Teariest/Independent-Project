@@ -61,17 +61,20 @@ namespace Physics_Simulator {
                         double dx = (ma * va.getXValue() + mb * vb.getXValue() + mb * e * (vb.getXValue() - va.getXValue())) / (ma + mb); // change in x using elasticity
                         double dy = (ma * va.getYValue() + mb * vb.getYValue() + mb * e * (vb.getYValue() - va.getYValue())) / (ma + mb); // change in y using elasticity
                         
+                        // change in velocity
                         newV[i].Add(0, 0, dx, dy);
+                        // change in position not velocity
                         rebound[i].Add(Math.Atan2(objects[i].GetXPos() - objects[j].GetXPos(), objects[i].GetYPos() - objects[j].GetYPos()), Math.Sqrt(distSqrd) - Math.Sqrt(minDistSqrd), 0, 0);
                     }
                 }
             }
 
-            for (int i = 0; i < objects.Length; i++) { // update positions
+            for (int i = 0; i < objects.Length; i++) { // update positions and velocities
 
-                if (newV[i].getMagnitude() != 0)
+                if (newV[i].getMagnitude() != 0) // if change in velocity then apply it
                     velocity[i] = newV[i];
 
+                // move ball based on new velocity (rebound included)
                 objects[i].Move(((velocity[i].getXValue() + rebound[i].getXValue()) * tInt), ((velocity[i].getYValue() + rebound[i].getYValue()) * tInt)); // error
             }
         }
