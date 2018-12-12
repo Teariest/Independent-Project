@@ -36,7 +36,7 @@ namespace Physics_Simulator {
         public SimulationPage() {
             this.InitializeComponent();
 
-            int numObjects = 8;
+            int numObjects = 11;
             UIObjects = new Ellipse[numObjects];
             eObjects = new EngineCircle[numObjects];
             vectors = new Vector[numObjects];
@@ -51,7 +51,10 @@ namespace Physics_Simulator {
             BuildEllipse(5, 20, 30, 2, 255, 100, 200, 100, 0, 0, 0, 0, 2, 0.5);
             BuildEllipse(6, 10, 40, 2, 255, 200, 100, 100, 0, 0, 10, 0, 2, 0);
             BuildEllipse(7, 20, 40, 2, 255, 100, 100, 200, 0, 0, 0, 0, 2, 0);
-
+            BuildEllipse(8, 10, 50, 2, 255, 0, 0, 0, 0, 0, 10, 0, 2, 0);
+            BuildEllipse(9, 10, 60, 2, 255, 200, 150, 50, 500, 0, 10, 0, 1, 1);
+            BuildEllipse(10, 20, 60, 2, 255, 50, 50, 60, 0, 0, 0, 0, 1, 1);
+            // | CHANGE SIZE OF ARRAY WHEN ADDING OR REMOVING OBJECT |
 
             // Build Engine
             simEngine = new Engine(eObjects, vectors, fps, g);
@@ -82,7 +85,7 @@ namespace Physics_Simulator {
         }
 
         /// <summary>
-        /// Variables are in meters, meters per second and degrees
+        /// Variables are in meters, meters per second, degrees and kilograms
         /// </summary>
         public void BuildEllipse(int index, double xPos, double yPos, double radius, byte a, byte r, byte g, byte b, double magnitude, double angle, double xV, double yV, double mass, double elasticity) {
             UIObjects[index] = new Ellipse();

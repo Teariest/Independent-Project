@@ -90,7 +90,7 @@ namespace Physics_Simulator {
 
         private void CalcVector() {
             mag = Math.Sqrt(Math.Pow(xVal, 2) + Math.Pow(yVal, 2));
-            angle = Math.Acos(xVal / mag);
+            angle = Math.Atan(yVal / xVal);
         }
 
         private void CalcScalar() {
@@ -112,7 +112,16 @@ namespace Physics_Simulator {
         /// Vector addition using raw values, only one pair of values have to be set to a value
         /// </summary>
         public void Add(double magnitude, double angle, double x, double y) {
-            Add(new Vector(magnitude, angle, x, y));
+            if (magnitude == 0) {
+                xVal += x;
+                yVal += y;
+                CalcVector();
+            }
+            else {
+                xVal += magnitude * Math.Cos(angle);
+                yVal += magnitude * Math.Sin(angle);
+                CalcVector();
+            }
         }
 
         /// <summary>

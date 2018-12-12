@@ -36,38 +36,41 @@ namespace Physics_Simulator {
             
             for (int i = 0; i < objects.Length; i++) { // change velocities
 
+                newV[i] = new Vector(0, 0, 0, 0);
+                rebound[i] = new Vector(0, 0, 0, 0);
+
                 for (int j = 0; j < objects.Length; j++) {
 
                     if (i == j) // do not check yourself
                         continue;
-
+                    
                     double distSqrd = Math.Pow(Diff(objects[i].GetXPos(), objects[j].GetXPos()), 2) + Math.Pow(Diff(objects[i].GetYPos(), objects[j].GetYPos()), 2);
                     double minDistSqrd = Math.Pow(objects[i].GetRadius() + objects[j].GetRadius(), 2);
-                    Debug.WriteLine("I: {2}, Dist:{0}, Min Dist:{1}", distSqrd, minDistSqrd, i);
+
                     // Collisions
                     if (distSqrd <= minDistSqrd) {
 
-                        Debug.WriteLine("Collision");
-
+                        // values to be used when calculating change in velocity
                         double ma = objects[i].GetMass();
                         Vector va = velocity[i];
                         double mb = objects[j].GetMass();
                         Vector vb = velocity[j];
                         double e = objects[i].GetElasticity();
 
-                        double xv = (ma * va.getXValue() + mb * vb.getXValue() + mb * e * (vb.getXValue() - va.getXValue())) / (ma + mb);
-                        double yv = (ma * va.getYValue() + mb * vb.getYValue() + mb * e * (vb.getYValue() - va.getYValue())) / (ma + mb);
-
-                        newV[i] = new Vector(0, 0, xv, yv);
-                        rebound[i] = new Vector(Math.Atan2(objects[i].GetXPos() - objects[j].GetXPos(), objects[i].GetYPos() - objects[j].GetYPos()), Math.Sqrt(distSqrd) - Math.Sqrt(minDistSqrd), 0, 0);
-                        //Debug.WriteLine("Rebound for {0}, X:{1}, Y:{2}", i, rebound[i].getXValue(), rebound[i].getYValue());
+                        // change in x and y velocities source: https://en.wikipedia.org/wiki/Coefficient_of_restitution
+                        double dx = (ma * va.getXValue() + mb * vb.getXValue() + mb * e * (vb.getXValue() - va.getXValue())) / (ma + mb); // change in x using elasticity
+                        double dy = (ma * va.getYValue() + mb * vb.getYValue() + mb * e * (vb.getYValue() - va.getYValue())) / (ma + mb); // change in y using elasticity
+                        
+                        newV[i].Add(0, 0, dx, dy);
+                        rebound[i].Add(Math.Atan2(objects[i].GetXPos() - objects[j].GetXPos(), objects[i].GetYPos() - objects[j].GetYPos()), Math.Sqrt(distSqrd) - Math.Sqrt(minDistSqrd), 0, 0);
                     }
                 }
             }
 
-            velocity = newV;
-
             for (int i = 0; i < objects.Length; i++) { // update positions
+
+                if (newV[i].getMagnitude() != 0)
+                    velocity[i] = newV[i];
 
                 objects[i].Move(((velocity[i].getXValue() + rebound[i].getXValue()) * tInt), ((velocity[i].getYValue() + rebound[i].getYValue()) * tInt)); // error
             }
