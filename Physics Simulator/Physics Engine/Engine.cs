@@ -58,9 +58,11 @@ namespace Physics_Simulator {
                         double e = objects[i].GetElasticity();
 
                         // change in x and y velocities source: https://en.wikipedia.org/wiki/Coefficient_of_restitution
-                        double dx = (ma * va.getXValue() + mb * vb.getXValue() + mb * e * (vb.getXValue() - va.getXValue())) / (ma + mb); // change in x using elasticity
-                        double dy = (ma * va.getYValue() + mb * vb.getYValue() + mb * e * (vb.getYValue() - va.getYValue())) / (ma + mb); // change in y using elasticity
-                        
+                        double dx = ((ma * va.getXValue()) + (mb * vb.getXValue()) + (mb * e * (vb.getXValue() - va.getXValue()))) / (ma + mb); // change in x using elasticity
+                        double dy = ((ma * va.getYValue()) + (mb * vb.getYValue()) + (mb * e * (vb.getYValue() - va.getYValue()))) / (ma + mb); // change in y using elasticity
+
+                        Debug.WriteLine("Ball {0}: xvf = {1}, yvf = {2}", i+1, dx, dy);
+
                         // change in velocity
                         newV[i].Add(0, 0, dx, dy);
                         // change in position not velocity

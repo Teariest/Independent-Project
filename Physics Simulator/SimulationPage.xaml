@@ -11,6 +11,11 @@
     <Grid>
         <Border BorderThickness="5" BorderBrush="Black">
             <Canvas x:Name="SimCanvas">
+                <TextBlock Canvas.Left="1000" Canvas.Top="100" Text="0 Elasticity" TextWrapping="Wrap"/>
+                <TextBlock Canvas.Left="1000" Canvas.Top="200" Text="0.5 Elasticity" TextWrapping="Wrap"/>
+                <TextBlock Canvas.Left="1000" Canvas.Top="300" Text="1 Elasticity" TextWrapping="Wrap"/>
+                <TextBlock Canvas.Left="1000" Canvas.Top="400" Text="2 Elasticity" TextWrapping="Wrap"/>
+                <TextBlock Canvas.Left="1000" Canvas.Top="500" Text="1 Elasticity" TextWrapping="Wrap"/>
             </Canvas>
         </Border>
     </Grid>
