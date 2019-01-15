@@ -73,15 +73,12 @@ namespace Physics_Simulator {
         /// Setup Vector, if either magnitude/angle OR x/y are set to 0 they will be ignored and vector will be calculate via the other set of variables
         /// </summary>
         public Vector(double magnitude, double angle, double x, double y) {
-
-            if (mag == 0) // if given scalars
-            {
+            if (mag == 0) { // if given scalars
                 xVal = x;
                 yVal = y;
                 CalcVector();
             }
-            else // if given vector
-            {
+            else { // if given vector
                 mag = magnitude;
                 this.angle = angle;
                 CalcScalar();
@@ -90,7 +87,7 @@ namespace Physics_Simulator {
 
         private void CalcVector() {
             mag = Math.Sqrt(Math.Pow(xVal, 2) + Math.Pow(yVal, 2));
-            angle = Math.Atan(yVal / xVal);
+            angle = xVal == 0 ? 0 : Math.Atan(yVal / xVal);
         }
 
         private void CalcScalar() {
@@ -112,15 +109,15 @@ namespace Physics_Simulator {
         /// Vector addition using raw values, only one pair of values have to be set to a value
         /// </summary>
         public void Add(double magnitude, double angle, double x, double y) {
-            if (magnitude == 0) {
+            if (magnitude == 0) { // given scalars
                 xVal += x;
                 yVal += y;
                 CalcVector();
             }
-            else {
-                xVal += magnitude * Math.Cos(angle);
-                yVal += magnitude * Math.Sin(angle);
-                CalcVector();
+            else { // given Vector
+                mag = magnitude;
+                this.angle = angle;
+                CalcScalar();
             }
         }
 
@@ -130,7 +127,7 @@ namespace Physics_Simulator {
         public void Invert() {
             xVal = -xVal;
             yVal = -yVal;
-            angle += angle > 0 ? -180 : 180;
+            angle += angle > 0 ? -Math.PI : Math.PI;
         }
 
         public double getXValue() { return xVal; }

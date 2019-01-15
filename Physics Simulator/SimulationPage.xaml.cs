@@ -27,7 +27,8 @@ namespace Physics_Simulator {
         private Vector[] vectors;
 
         private int fps = 60; // Frames per second
-        private double g = 0.3; // Gravity of simulation
+        private double g = 1; // Gravity of simulation
+        private double gA = -Math.PI / 2; // Direction of Gravity
 
         private DispatcherTimer timer; // Timer that requests engine to calculate and move objects at every interval
 
@@ -54,11 +55,10 @@ namespace Physics_Simulator {
             BuildEllipse(08, 20, 40, 2, 255, 000, 250, 250, 0, 0, 00, 00, 1, 2.0);
             BuildEllipse(09, 10, 50, 2, 255, 250, 250, 000, 0, 0, 10, 10, 1, 1.0); // 1 elasticity diagonal
             BuildEllipse(10, 20, 60, 2, 255, 250, 250, 000, 0, 0, 00, 00, 1, 1.0);
-
             // | CHANGE SIZE OF ARRAY WHEN ADDING OR REMOVING OBJECT |
 
             // Build Engine
-            simEngine = new Engine(eObjects, vectors, fps, g);
+            simEngine = new Engine(eObjects, vectors, fps, g, gA);
 
             // Build Dispatcher
             timer = new DispatcherTimer();

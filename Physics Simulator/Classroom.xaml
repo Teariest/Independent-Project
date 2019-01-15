@@ -8,7 +8,47 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock" x:Key="MenuIconStyle">
+                <Setter Property="FontFamily" Value="Segoe MDL2  Assets"/>
+                <Setter Property="FontSize" Value="50"/>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
 
-    </Grid>
+    <SplitView DisplayMode="CompactOverlay" OpenPaneLength="300" IsPaneOpen="True">
+
+        <SplitView.Pane>
+            <ListBox>
+
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE700;" FontSize="50"/>
+                        <TextBlock Text="Simple" FontSize="35"/>
+                    </StackPanel>
+                </ListBoxItem>
+                
+            </ListBox>
+        </SplitView.Pane>
+
+        <SplitView.Content>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- TITLE -->
+
+                <!-- EXPLANATION -->
+
+                <!-- SIMULATION -->
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Page>
