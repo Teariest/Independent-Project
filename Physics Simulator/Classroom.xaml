@@ -10,25 +10,64 @@
 
     <Page.Resources>
         <ResourceDictionary>
+            
+            <Style TargetType="StackPanel" x:Key="MenuStackPanelStyle">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Padding" Value="5"/>
+            </Style>
+            
             <Style TargetType="TextBlock" x:Key="MenuIconStyle">
-                <Setter Property="FontFamily" Value="Segoe MDL2  Assets"/>
-                <Setter Property="FontSize" Value="50"/>
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="MenuTextStyle">
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="Padding" Value="10,1,0,0"/>
+            </Style>
+
+            <Style TargetType="ListBoxItem" x:Name="MenuListBoxItem">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
             </Style>
         </ResourceDictionary>
     </Page.Resources>
 
-    <SplitView DisplayMode="CompactOverlay" OpenPaneLength="300" IsPaneOpen="True">
+    <SplitView Name="MenuSplitView" DisplayMode="CompactOverlay" CompactPaneLength="70" OpenPaneLength="300">
 
         <SplitView.Pane>
-            <ListBox>
+            <ListBox SelectionChanged="ListBox_SelectionChanged">
 
-                <ListBoxItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE700;" FontSize="50"/>
-                        <TextBlock Text="Simple" FontSize="35"/>
+                <ListBoxItem Name="MenuHamburgerItem" Style="{StaticResource MenuListBoxItem}">
+                    <StackPanel Style="{StaticResource MenuStackPanelStyle}">
+                        <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE700;"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text=""/>
                     </StackPanel>
                 </ListBoxItem>
-                
+
+                <ListBoxItem Name="MenuItem1" Style="{StaticResource MenuListBoxItem}">
+                    <StackPanel Style="{StaticResource MenuStackPanelStyle}">
+                        <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="First Page"/>
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Name="MenuItem2" Style="{StaticResource MenuListBoxItem}">
+                    <StackPanel Style="{StaticResource MenuStackPanelStyle}">
+                        <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Second Page"/>
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Name="MenuItem3" Style="{StaticResource MenuListBoxItem}">
+                    <StackPanel Style="{StaticResource MenuStackPanelStyle}">
+                        <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Third Page"/>
+                    </StackPanel>
+                </ListBoxItem>
+
             </ListBox>
         </SplitView.Pane>
 

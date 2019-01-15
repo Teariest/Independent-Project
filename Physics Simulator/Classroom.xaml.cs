@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,6 +23,14 @@ namespace Physics_Simulator {
     public sealed partial class Classroom : Page {
         public Classroom() {
             this.InitializeComponent();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            
+            if (MenuHamburgerItem.IsSelected) {
+                MenuSplitView.IsPaneOpen = !MenuSplitView.IsPaneOpen;
+                MenuHamburgerItem.IsSelected = false;
+            }
         }
     }
 }
