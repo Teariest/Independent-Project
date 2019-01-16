@@ -8,33 +8,6 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <ResourceDictionary>
-            
-            <Style TargetType="StackPanel" x:Key="MenuStackPanelStyle">
-                <Setter Property="Orientation" Value="Horizontal"/>
-                <Setter Property="Padding" Value="5"/>
-            </Style>
-            
-            <Style TargetType="TextBlock" x:Key="MenuIconStyle">
-                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-                <Setter Property="FontSize" Value="40"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="10"/>
-            </Style>
-
-            <Style TargetType="TextBlock" x:Key="MenuTextStyle">
-                <Setter Property="FontSize" Value="40"/>
-                <Setter Property="Padding" Value="10,1,0,0"/>
-            </Style>
-
-            <Style TargetType="ListBoxItem" x:Name="MenuListBoxItem">
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="Margin" Value="0"/>
-            </Style>
-        </ResourceDictionary>
-    </Page.Resources>
-
     <SplitView Name="MenuSplitView" DisplayMode="CompactOverlay" CompactPaneLength="70" OpenPaneLength="300">
 
         <SplitView.Pane>
@@ -72,22 +45,8 @@
         </SplitView.Pane>
 
         <SplitView.Content>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="6*"/>
-                    <RowDefinition Height="5*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- TITLE -->
-
-                <!-- EXPLANATION -->
-
-                <!-- SIMULATION -->
-            </Grid>
+            <Frame Name="LessonFrame">
+            </Frame>
         </SplitView.Content>
     </SplitView>
 </Page>
