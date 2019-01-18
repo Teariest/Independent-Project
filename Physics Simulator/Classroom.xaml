@@ -23,21 +23,37 @@
                 <ListBoxItem Name="MenuItem1" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
-                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="First Page"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Velocity"/>
                     </StackPanel>
                 </ListBoxItem>
+                
+                
 
                 <ListBoxItem Name="MenuItem2" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
-                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Second Page"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Acceleration"/>
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Name="MenuItem4" Style="{StaticResource MenuListBoxItem}">
+                    <StackPanel Style="{StaticResource MenuStackPanelStyle}">
+                        <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="2D Physics"/>
                     </StackPanel>
                 </ListBoxItem>
 
                 <ListBoxItem Name="MenuItem3" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
-                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Third Page"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Forces"/>
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Name="MenuItem5" Style="{StaticResource MenuListBoxItem}">
+                    <StackPanel Style="{StaticResource MenuStackPanelStyle}">
+                        <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Colisions"/>
                     </StackPanel>
                 </ListBoxItem>
 

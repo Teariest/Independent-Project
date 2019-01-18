@@ -45,8 +45,10 @@
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="Grid.Column" Value="0"/>
             <Setter Property="Grid.ColumnSpan" Value="2"/>
-            <Setter Property="Margin" Value="175,50"/>
+            <Setter Property="Margin" Value="175,50,175,0"/>
             <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="SemiLight"/>
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
         </Style>
 
         <Style TargetType="Frame" x:Name="LessonSim">

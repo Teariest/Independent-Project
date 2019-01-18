@@ -73,12 +73,15 @@ namespace Physics_Simulator {
         /// Setup Vector, if either magnitude/angle OR x/y are set to 0 they will be ignored and vector will be calculate via the other set of variables
         /// </summary>
         public Vector(double magnitude, double angle, double x, double y) {
-            if (mag == 0) { // if given scalars
+
+            if (magnitude == 0) { // if given scalars
+
                 xVal = x;
                 yVal = y;
                 CalcVector();
             }
             else { // if given vector
+
                 mag = magnitude;
                 this.angle = angle;
                 CalcScalar();
@@ -93,6 +96,7 @@ namespace Physics_Simulator {
         private void CalcScalar() {
             xVal = mag * Math.Cos(angle);
             yVal = mag * Math.Sin(angle);
+            Debug.WriteLine("M: " + mag + " A: " + angle + " x: " + xVal + " yVal: " + yVal);
         }
 
         /// <summary>

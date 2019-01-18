@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Physics_Simulator.Lesson1"
+    x:Class="Physics_Simulator.Lesson3"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Physics_Simulator"
@@ -20,11 +20,11 @@
 
         <!-- TITLE -->
 
-        <TextBlock Style="{StaticResource LessonTitle}" Text="Basics of Kinematics: Velocity and Speed"/>
+        <TextBlock Style="{StaticResource LessonTitle}" Text="Dynamics: Forces"/>
 
         <!-- EXPLANATION -->
 
-        <TextBlock Style="{StaticResource LessonExplanation}" Text="Speed is the change in position of an obect. It is measured in m/s and defined as &#x0394;x/&#x0394;t, change in position over change in time.&#x0a;In Calculus, it is the derivative of position.&#x0a;The difference between velocity and speed is that speed describes the rate of change in position of an object, regardless of it's direction, velocity however, takes direction into account"/>
+        <TextBlock Style="{StaticResource LessonExplanation}" Text="A force is like a push or pull, forces represent interactions between different objects.&#x0a; Forces are measured in Newtons, as forces were his invention. A newton is defined as N = ma, m is the mass of the object and a acceleration. N = (kg*m)/s^2. This way, we are able to see how objects of different masses are affected by the same force. Gravity is a force."/>
 
         <!-- SIMULATION -->
 
