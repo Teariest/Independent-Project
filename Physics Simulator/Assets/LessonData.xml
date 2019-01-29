@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LessonData>
+  
+  <Lesson id="1">
+    <Title>Basics of Kenematics: Velocity and Speed</Title>
+    <Description>
+      Speed is the change in position of an obect. It is measured in m/s and defined as &#x0394;x/&#x0394;t, change in 
+      position over change in time.&#x0a;In Calculus, it is the derivative of position.&#x0a;The difference between velocity
+      and speed is that speed describes the rate of change in position of an object, regardless of it's direction, velocity
+      however, takes direction into account.
+    </Description>
+    
+    <SimData>
+      <Ellipse id="0">
+        <xPos>10</xPos>
+        <yPos>20</yPos>
+        <radius>2</radius>
+        <ARGBColor>
+          <a>255</a>
+          <r>255</r>
+          <g>087</g>
+          <b>051</b>
+        </ARGBColor>
+        <Velocity>
+          <v>0</v>
+          <angle>0</angle>
+          <xV>10</xV>
+          <yV>00</yV>
+        </Velocity>
+        <mass>1</mass>
+        <elasticity>1</elasticity>
+      </Ellipse>
+      
+      <Ellipse id="1">
+        <xPos>80</xPos>
+        <yPos>30</yPos>
+        <radius>2</radius>
+        <ARGBColor>
+          <a>255</a>
+          <r>051</r>
+          <g>087</g>
+          <b>255</b>
+        </ARGBColor>
+        <Velocity>
+          <v>0</v>
+          <angle>0</angle>
+          <xV>-10</xV>
+          <yV>00</yV>
+        </Velocity>
+        <mass>1</mass>
+        <elasticity>1</elasticity>
+      </Ellipse>
+    </SimData>
+    
+  </Lesson>
+  
+</LessonData>
+
+<!--
+<Lesson id="">
+    <Title></Title>
+    <Description>
+    </Description>
+    <SimData n="">
+      <Ellipse id="">
+        <xPos></xPos>
+        <yPos></yPos>
+        <radius></radius>
+        <ARGBColor>
+          <a></a>
+          <r></r>
+          <g></g>
+          <b></b>
+        </ARGBColor>
+        <Velocity>
+          <v></v>
+          <angle></angle>
+          <xV></xV>
+          <yV></yV>
+        </Velocity>
+        <mass></mass>
+        <elasticity></elasticity>
+      </Ellipse>
+    </SimData>
+  </Lesson>
+  -->

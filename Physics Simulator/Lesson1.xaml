@@ -24,7 +24,7 @@
 
         <!-- EXPLANATION -->
 
-        <TextBlock Style="{StaticResource LessonExplanation}" Text="Speed is the change in position of an obect. It is measured in m/s and defined as &#x0394;x/&#x0394;t, change in position over change in time.&#x0a;In Calculus, it is the derivative of position.&#x0a;The difference between velocity and speed is that speed describes the rate of change in position of an object, regardless of it's direction, velocity however, takes direction into account"/>
+        <TextBlock Style="{StaticResource LessonExplanation}" Text="Speed is the change in position of an obect. It is measured in m/s and defined as &#x0394;x/&#x0394;t, change in position over change in time.&#x0a;In Calculus, it is the derivative of position.&#x0a;The difference between velocity and speed is that speed describes the rate of change in position of an object, regardless of it's direction, velocity however, takes direction into account."/>
 
         <!-- SIMULATION -->
 

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Diagnostics;
+using Physics_Simulator.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,6 +30,8 @@ namespace Physics_Simulator {
 
             LessonFrame.Navigate(typeof(Lesson1));
             MenuItem1.IsSelected = true;
+
+            XMLParser.ParseLesson("Assets/LessonData.xml");
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {

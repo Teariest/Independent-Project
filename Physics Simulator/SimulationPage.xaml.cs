@@ -136,8 +136,8 @@ namespace Physics_Simulator {
                     eObjects = new EngineCircle[n];
                     vectors = new Vector[n];
                     //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
-                    BuildEllipse(00, 35, 20, 2, 255, 255, 087, 051, 0, 0, 15, -15, 1, 1.0);
-                    g = -5;
+                    BuildEllipse(00, 35, 20, 2, 255, 255, 087, 051, 0, 0, 10, -10, 1, 1.0);
+                    g = -10;
                     break;
 
                 case 5:
