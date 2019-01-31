@@ -28,6 +28,6 @@ namespace Physics_Simulator.ViewModel {
     class VectorViewModel {
 
         public double x { get; set; }
-        public double y { get; set; }
+        public double y { get; set;  }
     }
 }
