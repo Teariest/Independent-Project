@@ -95,7 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ViewModels.cs" />
+    <Compile Include="ViewModel\XMLTree.cs" />
     <Compile Include="ViewModel\XMLParser.cs" />
     <Compile Include="Classroom.xaml.cs">
       <DependentUpon>Classroom.xaml</DependentUpon>

@@ -10,9 +10,7 @@ using System.Reflection;
 namespace Physics_Simulator.ViewModel {
     class XMLParser {
 
-        public static LessonViewModel ParseLesson(string filePath) {
-
-            LessonViewModel model = new LessonViewModel();
+        public static XMLTree ParseLesson(string filePath) {
 
             XmlReaderSettings settings = new XmlReaderSettings(); // allows us to ignore comments and only access nodes and relevant information
             settings.IgnoreComments = true;
@@ -20,38 +18,33 @@ namespace Physics_Simulator.ViewModel {
 
             XmlReader reader = XmlReader.Create(filePath, settings);
 
-            string nodeName = ""; // name of node containing value
-            List<LessonViewModel> Classroom = new List<LessonViewModel>();
+            reader.Read(); // get to correct xml tag
 
-            while (reader.Read()) {
-                
+            XMLTree tree = new XMLTree(reader.Name);
 
-                switch (reader.Name) {
+            RParser(reader, reader.Name, tree);
 
-                    case "ClassroomData":
-
-                        break;
-                }
-
-
-
-
-
-                /*
-                //Debug.WriteLine("|" + i + "|: |" + reader.Name + "|: |" + reader.HasValue + "| |" + reader.IsEmptyElement + "| |" +  reader.Value + "|");
-
-                if (reader.Name.Length == 0) { // if a value set value within model
-                    model.GetType().GetProperty(nodeName).SetValue(model, reader.Value);
-                }
-                else { // if a node possibly containing a value
-                    nodeName = reader.Name;
-                }*/
-            }
-
-            return model;
+            return tree;
         }
 
-        public static void ParseSimulation() {
+        public static void RParser(XmlReader reader, string tagName, XMLTree node) {
+
+            while (reader.Read()) {
+
+                if (reader.Name == tagName) { Debug.WriteLine("Close :" + tagName); return; } // IF END TAG BASECASE
+
+                if (reader.Name == "") { // IF VALUE
+                    Debug.WriteLine("Value :" + reader.Value);
+                    node.content = reader.Value;
+                }
+
+                else if (reader.Name != tagName) { // IF NEW TAG
+                    Debug.WriteLine("Open  :" + reader.Name);
+                    XMLTree child = new XMLTree(reader.Name);
+                    node.AddChild(child);
+                    RParser(reader, reader.Name, child);
+                }
+            }
 
         }
     }
