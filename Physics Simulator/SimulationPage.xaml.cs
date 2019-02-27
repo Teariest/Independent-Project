@@ -15,15 +15,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Navigation;
-
-
+using Physics_Simulator.ViewModel;
 
 namespace Physics_Simulator {
-
-    public static class LessonSimulationLiason {
-
-        public static int config = 1;
-    }
 
     public sealed partial class SimulationPage : Page {
 
@@ -42,9 +36,8 @@ namespace Physics_Simulator {
         public SimulationPage() {
             this.InitializeComponent();
 
-            //BuildDebugSim(); // | DEBUG ONLY BUILD|
-
-            BuildLessonSim(); // | LESSON DEMO BUILD |
+            if (HUB.testingSimulator) { BuildDebugSim(); } // DEBUG
+            else { BuildLessonSim(); }                     // LESSONS
             
             // Build Engine
             simEngine = new Engine(eObjects, vectors, fps, g, gA);
@@ -91,68 +84,87 @@ namespace Physics_Simulator {
 
         public void BuildLessonSim() {
 
-            int n = 0;
+            if (HUB.usingPreBuiltLessons) {
 
-            switch (LessonSimulationLiason.config) {
+                int n = 0;
 
-                case 1:
-                    n = 2;
-                    UIObjects = new Ellipse[n];
-                    eObjects = new EngineCircle[n];
-                    vectors = new Vector[n];
-                    //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
-                    BuildEllipse(00, 10, 20, 2, 255, 255, 087, 051, 0, 0, 10, 00, 1, 1.0);
-                    BuildEllipse(01, 80, 30, 2, 255, 051, 087, 255, 0, 0,-10, 00, 1, 1.0);
-                    g = 0;
-                    break;
+                switch (HUB.config) {
 
-                case 2:
-                    n = 2;
-                    UIObjects = new Ellipse[n];
-                    eObjects = new EngineCircle[n];
-                    vectors = new Vector[n];
-                    //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
-                    BuildEllipse(00, 35, 20, 2, 255, 255, 087, 051, 0, 0, 00, 00, 1, 1.0);
-                    BuildEllipse(01, 40, 15, 2, 255, 255, 087, 051, 0, 0, 00, -10, 1, 1.0);
-                    g = -5;
-                    break;
+                    case 1:
+                        n = 2;
+                        UIObjects = new Ellipse[n];
+                        eObjects = new EngineCircle[n];
+                        vectors = new Vector[n];
+                        //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
+                        BuildEllipse(00, 10, 20, 2, 255, 255, 087, 051, 0, 0, 10, 00, 1, 1.0);
+                        BuildEllipse(01, 80, 30, 2, 255, 051, 087, 255, 0, 0, -10, 00, 1, 1.0);
+                        g = 0;
+                        break;
 
-                case 3:
-                    n = 4;
-                    UIObjects = new Ellipse[n];
-                    eObjects = new EngineCircle[n];
-                    vectors = new Vector[n];
-                    //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
-                    BuildEllipse(00, 35, 20, 2, 255, 255, 087, 051, 10, 1, 00, 00, 1, 1.0);
-                    BuildEllipse(01, 40, 15, 1, 255, 255, 051, 087, 10, -2, 00, 00, 1, 1.0);
-                    BuildEllipse(02, 35, 30, 3, 255, 087, 051, 255, 10, -0.75, 00, 00, 1, 1.0);
-                    BuildEllipse(03, 45, 18, 2, 255, 051, 087, 255, 10, -0.3, 00, 00, 1, 1.0);
-                    g = -5;
-                    break;
+                    case 2:
+                        n = 2;
+                        UIObjects = new Ellipse[n];
+                        eObjects = new EngineCircle[n];
+                        vectors = new Vector[n];
+                        //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
+                        BuildEllipse(00, 35, 20, 2, 255, 255, 087, 051, 0, 0, 00, 00, 1, 1.0);
+                        BuildEllipse(01, 40, 15, 2, 255, 255, 087, 051, 0, 0, 00, -10, 1, 1.0);
+                        g = -5;
+                        break;
 
-                case 4:
-                    n = 1;
-                    UIObjects = new Ellipse[n];
-                    eObjects = new EngineCircle[n];
-                    vectors = new Vector[n];
-                    //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
-                    BuildEllipse(00, 35, 20, 2, 255, 255, 087, 051, 0, 0, 10, -10, 1, 1.0);
-                    g = -10;
-                    break;
+                    case 3:
+                        n = 4;
+                        UIObjects = new Ellipse[n];
+                        eObjects = new EngineCircle[n];
+                        vectors = new Vector[n];
+                        //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
+                        BuildEllipse(00, 35, 20, 2, 255, 255, 087, 051, 10, 1, 00, 00, 1, 1.0);
+                        BuildEllipse(01, 40, 15, 1, 255, 255, 051, 087, 10, -2, 00, 00, 1, 1.0);
+                        BuildEllipse(02, 35, 30, 3, 255, 087, 051, 255, 10, -0.75, 00, 00, 1, 1.0);
+                        BuildEllipse(03, 45, 18, 2, 255, 051, 087, 255, 10, -0.3, 00, 00, 1, 1.0);
+                        g = -5;
+                        break;
 
-                case 5:
-                    n = 4;
-                    UIObjects = new Ellipse[n];
-                    eObjects = new EngineCircle[n];
-                    vectors = new Vector[n];
-                    //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
-                    BuildEllipse(00, 35, 20, 2, 255, 051, 087, 255, 0, 0, 20, 00, 1, 0);
-                    BuildEllipse(01, 70, 20, 2, 255, 255, 087, 051, 0, 0,-20, 00, 1, 0);
-                    BuildEllipse(02, 35, 30, 2, 255, 051, 087, 255, 0, 0, 20, 00, 1, 0);
-                    BuildEllipse(03, 50, 30, 2, 255, 255, 087, 051, 0, 0, 0, 00, 1, 0);
-                    g = 0;
-                    break;
+                    case 4:
+                        n = 1;
+                        UIObjects = new Ellipse[n];
+                        eObjects = new EngineCircle[n];
+                        vectors = new Vector[n];
+                        //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
+                        BuildEllipse(00, 35, 20, 2, 255, 255, 087, 051, 0, 0, 10, -10, 1, 1.0);
+                        g = -10;
+                        break;
+
+                    case 5:
+                        n = 4;
+                        UIObjects = new Ellipse[n];
+                        eObjects = new EngineCircle[n];
+                        vectors = new Vector[n];
+                        //           i   x   y   r  a    r    g    b    v  0  vx  vy  m  e
+                        BuildEllipse(00, 35, 20, 2, 255, 051, 087, 255, 0, 0, 20, 00, 1, 0);
+                        BuildEllipse(01, 70, 20, 2, 255, 255, 087, 051, 0, 0, -20, 00, 1, 0);
+                        BuildEllipse(02, 35, 30, 2, 255, 051, 087, 255, 0, 0, 20, 00, 1, 0);
+                        BuildEllipse(03, 50, 30, 2, 255, 255, 087, 051, 0, 0, 0, 00, 1, 0);
+                        g = 0;
+                        break;
+                }
             }
+
+            else {
+
+                XMLTree root = HUB.root;
+
+                switch (HUB.config) {
+
+                    case 1:
+                        // case 1
+                        break;
+                }
+                // WORK
+            }
+        }
+
+        private void BuildSim(XMLTree node) {
 
         }
 

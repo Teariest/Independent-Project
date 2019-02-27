@@ -15,18 +15,13 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Physics_Simulator
-{
+namespace Physics_Simulator {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Lesson4 : Page
-    {
-        public Lesson4()
-        {
+    public sealed partial class Lesson : Page {
+        public Lesson() {
             this.InitializeComponent();
-            LessonSimFrame.Navigate(typeof(SimulationPage));
-            LessonSimulationLiason.config = 4;
         }
     }
 }

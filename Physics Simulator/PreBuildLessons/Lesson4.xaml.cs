@@ -20,13 +20,13 @@ namespace Physics_Simulator
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Lesson1 : Page
+    public sealed partial class Lesson4 : Page
     {
-        public Lesson1()
+        public Lesson4()
         {
             this.InitializeComponent();
             LessonSimFrame.Navigate(typeof(SimulationPage));
-            LessonSimulationLiason.config = 1;
+            HUB.config = 4;
         }
     }
 }

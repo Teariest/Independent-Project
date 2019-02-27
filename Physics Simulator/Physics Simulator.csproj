@@ -95,24 +95,28 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Lesson.xaml.cs">
+      <DependentUpon>Lesson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\HUB.cs" />
     <Compile Include="ViewModel\XMLTree.cs" />
     <Compile Include="ViewModel\XMLParser.cs" />
     <Compile Include="Classroom.xaml.cs">
       <DependentUpon>Classroom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lesson5.xaml.cs">
+    <Compile Include="PreBuildLessons\Lesson5.xaml.cs">
       <DependentUpon>Lesson5.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lesson4.xaml.cs">
+    <Compile Include="PreBuildLessons\Lesson4.xaml.cs">
       <DependentUpon>Lesson4.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lesson1.xaml.cs">
+    <Compile Include="PreBuildLessons\Lesson1.xaml.cs">
       <DependentUpon>Lesson1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lesson3.xaml.cs">
+    <Compile Include="PreBuildLessons\Lesson3.xaml.cs">
       <DependentUpon>Lesson3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lesson2.xaml.cs">
+    <Compile Include="PreBuildLessons\Lesson2.xaml.cs">
       <DependentUpon>Lesson2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Physics Engine\Engine.cs" />
@@ -149,27 +153,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Lesson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Classroom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Lesson5.xaml">
+    <Page Include="PreBuildLessons\Lesson5.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lesson4.xaml">
+    <Page Include="PreBuildLessons\Lesson4.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lesson1.xaml">
+    <Page Include="PreBuildLessons\Lesson1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Lesson3.xaml">
+    <Page Include="PreBuildLessons\Lesson3.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lesson2.xaml">
+    <Page Include="PreBuildLessons\Lesson2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

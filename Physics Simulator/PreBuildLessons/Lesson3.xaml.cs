@@ -24,7 +24,7 @@ namespace Physics_Simulator {
             this.InitializeComponent();
 
             LessonSimFrame.Navigate(typeof(SimulationPage));
-            LessonSimulationLiason.config = 3;
+            HUB.config = 3;
         }
     }
 }
