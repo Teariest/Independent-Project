@@ -31,15 +31,13 @@ namespace Physics_Simulator.ViewModel {
 
             while (reader.Read()) {
 
-                if (reader.Name == tagName) { Debug.WriteLine("Close :" + tagName); return; } // IF END TAG BASECASE
+                if (reader.Name == tagName) { return; } // IF END OF TAG BASECASE
 
                 if (reader.Name == "") { // IF VALUE
-                    Debug.WriteLine("Value :" + reader.Value);
                     node.content = reader.Value;
                 }
 
                 else if (reader.Name != tagName) { // IF NEW TAG
-                    Debug.WriteLine("Open  :" + reader.Name);
                     XMLTree child = new XMLTree(reader.Name);
                     node.AddChild(child);
                     RParser(reader, reader.Name, child);

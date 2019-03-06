@@ -30,7 +30,7 @@
             <Setter Property="Margin" Value="0"/>
         </Style>
         
-        <!-- | LESSONS STYLES | -->
+        <!-- | PRESET LESSONS STYLES | -->
 
         <Style TargetType="TextBlock" x:Name="LessonTitle">
             <Setter Property="Grid.Row" Value="0"/>

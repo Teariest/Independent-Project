@@ -36,14 +36,14 @@
                     </StackPanel>
                 </ListBoxItem>
 
-                <ListBoxItem Name="MenuItem4" Style="{StaticResource MenuListBoxItem}">
+                <ListBoxItem Name="MenuItem3" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
                         <TextBlock Style="{StaticResource MenuTextStyle}" Text="2D Physics"/>
                     </StackPanel>
                 </ListBoxItem>
 
-                <ListBoxItem Name="MenuItem3" Style="{StaticResource MenuListBoxItem}">
+                <ListBoxItem Name="MenuItem4" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
                         <TextBlock Style="{StaticResource MenuTextStyle}" Text="Forces"/>

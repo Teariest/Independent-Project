@@ -157,7 +157,7 @@ namespace Physics_Simulator {
                 switch (HUB.config) {
 
                     case 1:
-                        // case 1
+                        XMLTree simRoot = root.children.ElementAt(0).children.ElementAt(2); // gets to SimData tag
                         break;
                 }
                 // WORK

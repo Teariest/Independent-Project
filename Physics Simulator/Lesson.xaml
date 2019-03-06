@@ -8,7 +8,18 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="TitleText">
+            <Setter Property="FontSize" Value="40"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ContentText">
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+    </Page.Resources>
 
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <RelativePanel Name="RelativeCanvas">
+            
+        </RelativePanel>
+    </ScrollViewer>
 </Page>
