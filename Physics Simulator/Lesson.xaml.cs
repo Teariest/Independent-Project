@@ -42,31 +42,35 @@ namespace Physics_Simulator {
             RelativeCanvas.Children.Clear();
 
             if (HUB.config == 1) {
-                BuildTextBox(0, true, "hello world");
+                BuildTextBox(new int[] { 0, 0, 0, 0 }, true, "hello world");
             }
 
             if (HUB.config == 2) {
-                BuildTextBox(0, true, "hello world 2");
+                BuildTextBox(new int[] { 10, 0, 0, 0 }, true, "hello world 2");
             }
 
             if (HUB.config == 3) {
-                BuildTextBox(0, false, "hello world");
+                BuildTextBox(new int[] { 20, 40, 0, 0 }, false, "hello world");
             }
         }
 
-        private void BuildTextBox(int hAlignment, bool title, string text) {
+        private void BuildTextBox(int[] margin, bool title, string text) { // margin is left, top, right, bottom
+
+            if (margin.Length != 4 || string.IsNullOrEmpty(text)) {
+                throw new System.Exception("Illegal parameter");
+            }
 
             TextBlock block = new TextBlock();
 
             block.Text = text;
-
+            block.Margin = new Thickness(margin[0], margin[1], margin[2], margin[3]);        
+            // Get style from xaml document and apply it here to the block
             if (title) {
                 block.Style = (Style) this.Resources.Where(nab => nab.Key.ToString() == "TitleText").FirstOrDefault().Value; // source1
             }
             else {
                 block.Style = (Style)this.Resources.Where(nab => nab.Key.ToString() == "ContentText").FirstOrDefault().Value; // source1
             }
-            Debug.WriteLine("Test 1534");
             RelativeCanvas.Children.Add(block);
         }
     }

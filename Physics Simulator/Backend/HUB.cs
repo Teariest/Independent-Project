@@ -14,6 +14,6 @@ namespace Physics_Simulator {
         public static int config = 1;
 
         public static bool usingPreBuiltLessons = false;
-        public static bool testingSimulator = false; // precedes usingPreBuiltLessons
+        public static bool testingSimulator = false;
     }
 }
