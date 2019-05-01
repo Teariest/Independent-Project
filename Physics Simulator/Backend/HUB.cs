@@ -9,9 +9,9 @@ namespace Physics_Simulator {
 
     class HUB {
 
-        public static XMLTree root;
+        public static XMLTree root; // should start at <xml> tag
 
-        public static int config = 1;
+        public static int config = 1; // which lesson should be displayed, starts at 1
 
         public static bool usingPreBuiltLessons = false;
         public static bool testingSimulator = false;

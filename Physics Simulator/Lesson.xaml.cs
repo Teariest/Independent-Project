@@ -26,6 +26,7 @@ namespace Physics_Simulator {
     public sealed partial class Lesson : Page {
 
         private int pageWidth = 1280; // width in pixels
+        private int rowNum = 0;
 
         public Lesson() {
             this.InitializeComponent();
@@ -39,22 +40,26 @@ namespace Physics_Simulator {
 
         public void BuildLesson() {
 
-            RelativeCanvas.Children.Clear();
+            XMLTree lroot = HUB.root.children.ElementAt(0);
 
+            GridCanvas.Children.Clear();
+            GridCanvas.RowDefinitions.Clear();
+            rowNum = 0;
+
+            // config starts at 1
             if (HUB.config == 1) {
-                BuildTextBox(new int[] { 0, 0, 0, 0 }, true, "hello world");
-            }
-
-            if (HUB.config == 2) {
-                BuildTextBox(new int[] { 10, 0, 0, 0 }, true, "hello world 2");
-            }
-
-            if (HUB.config == 3) {
-                BuildTextBox(new int[] { 20, 40, 0, 0 }, false, "hello world");
+                lroot = lroot.children.ElementAt(0);
+                BuildFromTree(lroot, "");
             }
         }
 
-        private void BuildTextBox(int[] margin, bool title, string text) { // margin is left, top, right, bottom
+        private void BuildTextBox(bool title, string text, int id) { // simpler version without all the parameters
+
+            BuildTextBox(new int[] { 0, 0, 0, 0 }, title, text, id - 1, 4);
+        }
+
+        // margin is left(1), top(2), right(3), bottom(4)       (relPox)
+        private void BuildTextBox(int[] margin, bool title, string text, int relID, int relPos) {
 
             if (margin.Length != 4 || string.IsNullOrEmpty(text)) {
                 throw new System.Exception("Illegal parameter");
@@ -63,7 +68,8 @@ namespace Physics_Simulator {
             TextBlock block = new TextBlock();
 
             block.Text = text;
-            block.Margin = new Thickness(margin[0], margin[1], margin[2], margin[3]);        
+            block.Margin = new Thickness(margin[0], margin[1], margin[2], margin[3]);
+            
             // Get style from xaml document and apply it here to the block
             if (title) {
                 block.Style = (Style) this.Resources.Where(nab => nab.Key.ToString() == "TitleText").FirstOrDefault().Value; // source1
@@ -71,7 +77,45 @@ namespace Physics_Simulator {
             else {
                 block.Style = (Style)this.Resources.Where(nab => nab.Key.ToString() == "ContentText").FirstOrDefault().Value; // source1
             }
-            RelativeCanvas.Children.Add(block);
+
+            GridCanvas.RowDefinitions.Add(new RowDefinition());
+            GridCanvas.RowDefinitions.ElementAt(rowNum).Height = new GridLength(1, GridUnitType.Star);
+            GridCanvas.Children.Add(block);
+            block.SetValue(Grid.RowProperty, rowNum);
+            rowNum++;
+        }
+
+        private void BuildFromTree(XMLTree node, string p) {
+            
+            if (node.tagName.Equals("Title")) {
+
+                BuildTextBox(true, node.content, 0);
+                return;
+            }
+
+            else if (node.tagName.Equals("Content")) {
+                int i = 1;
+                foreach (XMLTree n in node.children) {
+
+                    BuildTextBox(false, n.content, i);
+                }
+                return;
+            }
+
+            else if (node.tagName.Equals("SimulationData")) {
+
+                // TODO
+            }
+
+            else if (p.Equals("SimulationData")) {
+
+            }
+
+            else {
+                foreach(XMLTree n in node.children) {
+                    BuildFromTree(n, "");
+                }
+            }
         }
     }
 }

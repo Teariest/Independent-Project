@@ -18,8 +18,8 @@
     </Page.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <RelativePanel Name="RelativeCanvas">
+        <Grid Name="GridCanvas">
             
-        </RelativePanel>
+        </Grid>
     </ScrollViewer>
 </Page>
