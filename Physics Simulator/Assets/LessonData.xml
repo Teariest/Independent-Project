@@ -4,11 +4,11 @@
   <Lesson>
     <Title>This is the title text</Title>
     <Content>
-      <Block id="0">This is content text</Block>
-      <Block id="1">This is also content text but is in a different block</Block>
+      <Block>This is content text</Block>
+      <Block>This is also content text but is in a different block however I must make it very long asldkjf aksdjcoxqw fwoeifjqojso voasd oisodivjo ow qiofwoij oid iodsjfioewqe f shdfiajsd ff ewifwwe weivo.</Block>
     </Content>
     <SimulationData>
-      <Simulation id="2">
+      <Simulation>
         <fps>60</fps>
         <g>-5</g>
         <gAD>-90</gAD>

@@ -14,10 +14,11 @@
         </Style>
         <Style TargetType="TextBlock" x:Key="ContentText">
             <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
         </Style>
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto">
         <Grid Name="GridCanvas">
             
         </Grid>

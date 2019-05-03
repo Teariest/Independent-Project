@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Diagnostics;
+using System.Windows;
 
 
 
@@ -25,7 +25,7 @@ namespace Physics_Simulator {
 
     public sealed partial class Lesson : Page {
 
-        private int pageWidth = 1280; // width in pixels
+        private int pageWidth = 1300; // width in pixels
         private int rowNum = 0;
 
         public Lesson() {
@@ -34,6 +34,9 @@ namespace Physics_Simulator {
             HUB.root = XMLParser.ParseLesson("Assets/LessonData.xml");
 
             Classroom.BLA = BuildLesson;
+
+            GridCanvas.ColumnDefinitions.Add(new ColumnDefinition());
+            GridCanvas.ColumnDefinitions.ElementAt(rowNum).Width = new GridLength(pageWidth-20);
 
             BuildLesson();
         }
@@ -55,11 +58,11 @@ namespace Physics_Simulator {
 
         private void BuildTextBox(bool title, string text, int id) { // simpler version without all the parameters
 
-            BuildTextBox(new int[] { 0, 0, 0, 0 }, title, text, id - 1, 4);
+            BuildTextBox(new int[] { 20, 10, 0, 20 }, title, text);
         }
 
-        // margin is left(1), top(2), right(3), bottom(4)       (relPox)
-        private void BuildTextBox(int[] margin, bool title, string text, int relID, int relPos) {
+        // margin is left, top, right, bottom
+        private void BuildTextBox(int[] margin, bool title, string text) {
 
             if (margin.Length != 4 || string.IsNullOrEmpty(text)) {
                 throw new System.Exception("Illegal parameter");
@@ -79,10 +82,20 @@ namespace Physics_Simulator {
             }
 
             GridCanvas.RowDefinitions.Add(new RowDefinition());
-            GridCanvas.RowDefinitions.ElementAt(rowNum).Height = new GridLength(1, GridUnitType.Star);
+            GridCanvas.RowDefinitions.ElementAt(rowNum).Height = new GridLength(1, GridUnitType.Auto);
+            
+
             GridCanvas.Children.Add(block);
             block.SetValue(Grid.RowProperty, rowNum);
+            block.SetValue(Grid.ColumnProperty, 0);
+
             rowNum++;
+        }
+
+        private void BuildSimulationFrame() {
+
+            Frame sim = new Frame();
+            sim.Navigate((typeof)SimulationPage)
         }
 
         private void BuildFromTree(XMLTree node, string p) {
@@ -103,7 +116,7 @@ namespace Physics_Simulator {
             }
 
             else if (node.tagName.Equals("SimulationData")) {
-
+                
                 // TODO
             }
 
