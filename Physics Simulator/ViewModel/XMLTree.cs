@@ -35,6 +35,10 @@ namespace Physics_Simulator.ViewModel {
             this.children.Add(new XMLTree(tagName, content));
         }
 
+        public XMLTree Duplicate() {
+            return new XMLTree(this.children, this.tagName, this.content);
+        }
+
         public List<XMLTree> children = new List<XMLTree>();
         public string tagName;
         public string content;

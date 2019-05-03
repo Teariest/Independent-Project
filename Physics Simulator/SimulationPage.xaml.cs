@@ -152,20 +152,39 @@ namespace Physics_Simulator {
 
             else {
 
-                XMLTree root = HUB.root;
+                XMLTree r = HUB.simRoot;
 
-                switch (HUB.config) {
+                foreach(XMLTree n in r.children) {
 
-                    case 1:
-                        XMLTree simRoot = root.children.ElementAt(0).children.ElementAt(2); // gets to SimData tag
-                        break;
+                    if (n.tagName.Equals("fps")) {
+                        fps = int.Parse(n.content);
+                    }
+
+                    if (n.tagName.Equals("g")) {
+                        g = int.Parse(n.content);
+                    }
+
+                    if (n.tagName.Equals("gAD")) {
+                        gA = int.Parse(n.content);
+                    }
+
+                    if (n.tagName.Equals("ObjectData")) {
+
+                        foreach (XMLTree m in n.children) {
+                            ///////////////////////
+                        }
+                    }
+
+                    if (n.tagName.Equals("VelocityData")) {
+
+                        foreach (XMLTree m in n.children) {
+                            /////////////////////////////
+                        }
+                    }
                 }
-                // WORK
+
+                // get data into simulator
             }
-        }
-
-        private void BuildSim(XMLTree node) {
-
         }
 
         public void BuildDebugSim() {

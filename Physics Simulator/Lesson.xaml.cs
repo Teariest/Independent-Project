@@ -94,8 +94,12 @@ namespace Physics_Simulator {
 
         private void BuildSimulationFrame() {
 
+            HUB.simRoot
+
             Frame sim = new Frame();
-            sim.Navigate((typeof)SimulationPage)
+            sim.Navigate(typeof(SimulationPage));
+
+
         }
 
         private void BuildFromTree(XMLTree node, string p) {
@@ -116,8 +120,14 @@ namespace Physics_Simulator {
             }
 
             else if (node.tagName.Equals("SimulationData")) {
-                
-                // TODO
+
+                foreach (XMLTree n in node.children) {
+
+                    HUB.simRoot = n.Duplicate(); // give duplicate to make sure that there isn't funny business where I edit node in another class but use it again here assuming it wasn't changed elsewhere
+
+                    Frame sim = new Frame();
+                    sim.Navigate(typeof(SimulationPage));
+                }
             }
 
             else if (p.Equals("SimulationData")) {

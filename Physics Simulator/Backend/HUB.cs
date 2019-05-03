@@ -10,6 +10,7 @@ namespace Physics_Simulator {
     class HUB {
 
         public static XMLTree root; // should start at <xml> tag
+        public static XMLTree simRoot; // <SimData> node that contains next simulation to be loaded in if using lesson.xaml
 
         public static int config = 1; // which lesson should be displayed, starts at 1
 
