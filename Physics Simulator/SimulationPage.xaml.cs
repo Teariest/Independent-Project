@@ -30,6 +30,8 @@ namespace Physics_Simulator {
         private double gA = -Math.PI / 2; // Direction of Gravity
 
         private DispatcherTimer timer; // Timer that requests engine to calculate and move objects at every interval
+        private DispatcherTimer resetTimer; // Timer to reset engine
+        int resetTime = 7; // Reset interval in seconds
 
         private Engine simEngine; // Physics Engine
 
@@ -47,15 +49,27 @@ namespace Physics_Simulator {
             timer.Tick += Dispatch;
             timer.Interval = new TimeSpan(0, 0, 0, 0, (1000 / fps));
             timer.Start();
+
+            resetTimer = new DispatcherTimer();
+            resetTimer.Tick += Reset;
+            resetTimer.Interval = new TimeSpan(0, 0, 0, resetTime);
+            resetTimer.Start();
         }
 
         /// <summary>
         /// Runs once for every frame, changes everything that has to be changed during the frame
         /// </summary>
         private void Dispatch(object sender, object e) {
-
+            
             simEngine.ExecuteNext();
             RefreshDisplay();
+        }
+
+        private void Reset(object sender, object e) {
+            
+            SimCanvas.Children.Clear();
+            BuildLessonSim();
+            simEngine = new Engine(eObjects, vectors, fps, g, gA);
         }
 
         private void RefreshDisplay() {

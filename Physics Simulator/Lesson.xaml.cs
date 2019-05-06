@@ -14,8 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Windows;
-
-
+using System.Diagnostics;
 
 namespace Physics_Simulator {
 
@@ -48,12 +47,9 @@ namespace Physics_Simulator {
             GridCanvas.Children.Clear();
             GridCanvas.RowDefinitions.Clear();
             rowNum = 0;
-
-            // config starts at 1
-            if (HUB.config == 1) {
-                lroot = lroot.children.ElementAt(0);
-                BuildFromTree(lroot);
-            }
+            
+            lroot = lroot.children.ElementAt(HUB.config - 1);
+            BuildFromTree(lroot);
         }
 
         private void BuildTextBox(bool title, string text, int id) { // simpler version without all the parameters
@@ -119,7 +115,7 @@ namespace Physics_Simulator {
                     sim.Navigate(typeof(SimulationPage));
 
                     GridCanvas.RowDefinitions.Add(new RowDefinition());
-                    GridCanvas.RowDefinitions.ElementAt(rowNum).Height = new GridLength(1, GridUnitType.Auto);
+                    GridCanvas.RowDefinitions.ElementAt(rowNum).Height = new GridLength(350);
 
 
                     GridCanvas.Children.Add(sim);
