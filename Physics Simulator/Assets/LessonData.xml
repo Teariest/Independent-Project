@@ -200,5 +200,64 @@
         </ObjectData>
       </Simulation>
     </SimulationData>
+    <Content>
+      <Block>Velocity is defined as Δx/Δt, average velocity, is the the displacement (change in position) over change in time. Displacement is final position minus original position.</Block>
+      <Block>Speed is the magnitude of velocity, velocity has a component of direction, backwards or forward. However speed is always positive, it is the absolute value of velocity: s = |v|. Average speed is the distance traveled over change in time: d/Δt. If a car goes around a 1 mile long circle at 10 miles per hour, the average velocity of the car will be 0 mph, however, the average speed of the car will be 10 mph.</Block>
+    </Content>
+    <SimulationData>
+      <Simulation>
+        <fps>60</fps>
+        <g>0</g>
+        <gAD>0</gAD>
+        <r>10</r>
+        <ObjectData>
+          <Object>
+            <x>10</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>32</r>
+              <g>255</g>
+              <b>163</b>
+            </Color>
+            <Velocity>
+              <x>20</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
+          <Object>
+            <x>114</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>000</a>
+              <r>32</r>
+              <g>255</g>
+              <b>255</b>
+            </Color>
+            <Velocity>
+              <x>-20</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
+        </ObjectData>
+      </Simulation>
+    </SimulationData>
+    <Content>
+      <Block>In the simulation above, the green ball is travelling at a constant speed of 20 u/s (units per second), however, it's velocity is initialy 20 u/s, but then changes to -20 u/s.</Block>
+      <Block>Everytime that the ball return's to it's original position, the average velocity is 0 u/s because the displacement is 0 u (units). The average speed however is 20 u/s.</Block>
+    </Content>
+  </Lesson>
+  <Lesson>
+    
   </Lesson>
 </ClassroomData>
