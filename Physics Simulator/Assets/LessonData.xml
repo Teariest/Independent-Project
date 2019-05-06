@@ -12,13 +12,14 @@
         <fps>60</fps>
         <g>-5</g>
         <gAD>-90</gAD>
+        <r>7</r>
         <ObjectData>
           <Oject id="0">
             <x>10</x>
             <y>10</y>
             <r>2</r>
             <m>1</m>
-            <e>1</e>
+            <e>0</e>
             <Color>
               <a>255</a>
               <r>255</r>
@@ -37,7 +38,7 @@
             <y>10</y>
             <r>2</r>
             <m>1</m>
-            <e>1</e>
+            <e>0</e>
             <Color>
               <a>255</a>
               <r>150</r>
@@ -74,6 +75,7 @@
         <fps>60</fps>
         <g>-5</g>
         <gAD>-90</gAD>
+        <r>7</r>
         <ObjectData>
           <Oject id="0">
             <x>10</x>
@@ -100,6 +102,7 @@
         <fps>60</fps>
         <g>-5</g>
         <gAD>-90</gAD>
+        <r>7</r>
         <ObjectData>
           <Oject>
             <x>10</x>
@@ -136,6 +139,7 @@
         <fps>60</fps>
         <g>-5</g>
         <gAD>-90</gAD>
+        <r>7</r>
         <ObjectData>
           <Oject>
             <x>10</x>
@@ -156,6 +160,43 @@
               <a>00</a>
             </Velocity>
           </Oject>
+        </ObjectData>
+      </Simulation>
+    </SimulationData>
+  </Lesson>
+
+  <Lesson>
+    <Title>Velocity and Speed</Title>
+    <Content>
+      <Block>In many day-to-day circumstances, velocity and speed are interchangable words. Velocity, is the change in position over the change in time, Δx/Δt. The character delta "Δ" is the greek character for d, in the scientific community, Δ means change.</Block>
+      <Block>To calculus students, this concept should be very familliar. Here's an example: if a ball moves 5 meters to the right every 2 seconds, Δx = 5 meters, and Δt = 2 seconds. Therefore, Δx/Δt = 5m/2s = 2.5 meters per second, the ball is moving at a speed of 2.5 meters per second.</Block>
+    </Content>
+    <SimulationData>
+      <Simulation>
+        <fps>60</fps>
+        <g>0</g>
+        <gAD>0</gAD>
+        <r>15</r>
+        <ObjectData>
+          <Object>
+            <x>10</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>32</r>
+              <g>163</g>
+              <b>255</b>
+            </Color>
+            <Velocity>
+              <x>10</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
         </ObjectData>
       </Simulation>
     </SimulationData>

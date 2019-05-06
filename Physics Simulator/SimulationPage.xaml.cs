@@ -177,8 +177,9 @@ namespace Physics_Simulator {
                 fps = int.Parse(rn.children.ElementAt(0).content);
                 g = double.Parse(rn.children.ElementAt(1).content);
                 gA = double.Parse(rn.children.ElementAt(2).content);
+                resetTime = int.Parse(rn.children.ElementAt(3).content);
 
-                XMLTree o = rn.children.ElementAt(3); // object list
+                XMLTree o = rn.children.ElementAt(4); // object list
 
                 int c = o.children.Count;
                 UIObjects = new Ellipse[c];

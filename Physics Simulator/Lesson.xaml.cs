@@ -60,8 +60,11 @@ namespace Physics_Simulator {
         // margin is left, top, right, bottom
         private void BuildTextBox(int[] margin, bool title, string text) {
 
-            if (margin.Length != 4 || string.IsNullOrEmpty(text)) {
+            if (margin.Length != 4) {
                 throw new System.Exception("Illegal parameter");
+            }
+            if (text == null) {
+                text = "";
             }
 
             TextBlock block = new TextBlock();
