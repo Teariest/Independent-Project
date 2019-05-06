@@ -23,7 +23,7 @@
                 <ListBoxItem Name="MenuItem1" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
-                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Velocity"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Motion"/>
                     </StackPanel>
                 </ListBoxItem>
                 
@@ -39,9 +39,11 @@
                 <ListBoxItem Name="MenuItem3" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
-                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="2D Physics"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Calculations"/>
                     </StackPanel>
                 </ListBoxItem>
+                
+                <!--
 
                 <ListBoxItem Name="MenuItem4" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
@@ -56,6 +58,7 @@
                         <TextBlock Style="{StaticResource MenuTextStyle}" Text="Colisions"/>
                     </StackPanel>
                 </ListBoxItem>
+                -->
 
             </ListBox>
         </SplitView.Pane>

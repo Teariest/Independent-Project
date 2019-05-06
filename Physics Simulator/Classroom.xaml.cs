@@ -82,6 +82,7 @@ namespace Physics_Simulator {
                 PrevSelect = 3;
             }
 
+            /*
             else if (MenuItem4.IsSelected || (reset && PrevSelect == 4)) {
                 HUB.config = 4;
                 if (HUB.usingPreBuiltLessons) LessonFrame.Navigate(typeof(Lesson3));
@@ -95,6 +96,7 @@ namespace Physics_Simulator {
                 else { BLA(); }
                 PrevSelect = 5;
             }
+            */
         }
     }
 }

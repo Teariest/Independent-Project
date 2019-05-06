@@ -2,170 +2,6 @@
 
 <ClassroomData>
   <Lesson>
-    <Title>This is the title text</Title>
-    <Content>
-      <Block>This is content text</Block>
-      <Block>This is also content text but is in a different block however I must make it very long asldkjf aksdjcoxqw fwoeifjqojso voasd oisodivjo ow qiofwoij oid iodsjfioewqe f shdfiajsd ff ewifwwe weivo. asdlkfjsdlk sdkf sdf ks klsjf lksdf sdklf jkds klsd s klsdjflkasjdf;lkj sdl dsvla  sdl sdl sdlf klsdjalkdsj flsdjf lksdj lsdj lksdflsad l sdlfjsdlkjf lsdjf sld fldskjflkds flsdjlfj sdlfsdlkfjlsdk lsdf sd fklsdj flkds flds.</Block>
-    </Content>
-    <SimulationData>
-      <Simulation>
-        <fps>60</fps>
-        <g>-5</g>
-        <gAD>-90</gAD>
-        <r>7</r>
-        <ObjectData>
-          <Oject id="0">
-            <x>10</x>
-            <y>10</y>
-            <r>2</r>
-            <m>1</m>
-            <e>0</e>
-            <Color>
-              <a>255</a>
-              <r>255</r>
-              <g>051</g>
-              <b>087</b>
-            </Color>
-            <Velocity>
-              <x>10</x>
-              <y>00</y>
-              <m>00</m>
-              <a>00</a>
-            </Velocity>
-          </Oject>
-          <Oject>
-            <x>50</x>
-            <y>10</y>
-            <r>2</r>
-            <m>1</m>
-            <e>0</e>
-            <Color>
-              <a>255</a>
-              <r>150</r>
-              <g>051</g>
-              <b>087</b>
-            </Color>
-            <Velocity>
-              <x>-10</x>
-              <y>00</y>
-              <m>00</m>
-              <a>00</a>
-            </Velocity>
-          </Oject>
-        </ObjectData>
-      </Simulation>
-    </SimulationData>
-    <Content>
-      <Block>This is  some more text that comes after the simulation</Block>
-    </Content>
-    <Title>This is a second title and should come after the text after the simulation</Title>
-    <Content>
-      <Block>This is a small block</Block>
-      <Block>This is a larger block with more things on it spam spam spam blah blah blah asldkjflasdlkjvlskjlksdjkc.d dsjflsd kdslds fdslsdkl fsd fds lksdj.</Block>
-    </Content>
-  </Lesson>
-  <Lesson>
-    <Title>Not the same thing</Title>
-    <Content>
-      <Block>This is content text</Block>
-      <Block>This is also content text but is in a different block however I must make it very long asldkjf aksdjcoxqw fwoeifjqojso voasd oisodivjo ow qiofwoij oid iodsjfioewqe f shdfiajsd ff ewifwwe weivo. asdlkfjsdlk sdkf sdf ks klsjf lksdf sdklf jkds klsd s klsdjflkasjdf;lkj sdl dsvla  sdl sdl sdlf klsdjalkdsj flsdjf lksdj lsdj lksdflsad l sdlfjsdlkjf lsdjf sld fldskjflkds flsdjlfj sdlfsdlkfjlsdk lsdf sd fklsdj flkds flds.</Block>
-    </Content>
-    <SimulationData>
-      <Simulation>
-        <fps>60</fps>
-        <g>-5</g>
-        <gAD>-90</gAD>
-        <r>7</r>
-        <ObjectData>
-          <Oject id="0">
-            <x>10</x>
-            <y>10</y>
-            <r>2</r>
-            <m>1</m>
-            <e>0.5</e>
-            <Color>
-              <a>255</a>
-              <r>255</r>
-              <g>051</g>
-              <b>255</b>
-            </Color>
-            <Velocity>
-              <x>10</x>
-              <y>00</y>
-              <m>00</m>
-              <a>00</a>
-            </Velocity>
-          </Oject>
-        </ObjectData>
-      </Simulation>
-      <Simulation>
-        <fps>60</fps>
-        <g>-5</g>
-        <gAD>-90</gAD>
-        <r>7</r>
-        <ObjectData>
-          <Oject>
-            <x>10</x>
-            <y>10</y>
-            <r>2</r>
-            <m>1</m>
-            <e>0.5</e>
-            <Color>
-              <a>255</a>
-              <r>100</r>
-              <g>000</g>
-              <b>087</b>
-            </Color>
-            <Velocity>
-              <x>10</x>
-              <y>00</y>
-              <m>00</m>
-              <a>00</a>
-            </Velocity>
-          </Oject>
-        </ObjectData>
-      </Simulation>
-    </SimulationData>
-    <Content>
-      <Block>This is  some more text that comes after the simulation</Block>
-    </Content>
-    <Title>This is a second title and should come after the text after the simulation</Title>
-    <Content>
-      <Block>This is a small block</Block>
-      <Block>This is a larger block with more things on it spam spam spam blah blah blah asldkjflasdlkjvlskjlksdjkc.d dsjflsd kdslds fdslsdkl fsd fds lksdj.</Block>
-    </Content>
-    <SimulationData>
-      <Simulation>
-        <fps>60</fps>
-        <g>-5</g>
-        <gAD>-90</gAD>
-        <r>7</r>
-        <ObjectData>
-          <Oject>
-            <x>10</x>
-            <y>10</y>
-            <r>2</r>
-            <m>1</m>
-            <e>0.5</e>
-            <Color>
-              <a>255</a>
-              <r>000</r>
-              <g>250</g>
-              <b>150</b>
-            </Color>
-            <Velocity>
-              <x>10</x>
-              <y>00</y>
-              <m>00</m>
-              <a>00</a>
-            </Velocity>
-          </Oject>
-        </ObjectData>
-      </Simulation>
-    </SimulationData>
-  </Lesson>
-
-  <Lesson>
     <Title>Velocity and Speed</Title>
     <Content>
       <Block>In many day-to-day circumstances, velocity and speed are interchangable words. Velocity, is the change in position over the change in time, Δx/Δt. The character delta "Δ" is the greek character for d, in the scientific community, Δ means change.</Block>
@@ -258,6 +94,123 @@
     </Content>
   </Lesson>
   <Lesson>
-    
+    <Title>Acceleration</Title>
+    <Content>
+      <Block>Velocity is the change in position over a certain length of time, what is the change in velocity of a length of time? Acceleration.</Block>
+      <Block>Because acceleration is the change in velocity over a change in time: a = Δv/Δt = Δm/((Δt)^2), this means that acceleration is measured in meters per second squared: m/s/s or m/s^2.</Block>
+      <Block>Obects on earth fall, when falling, an object is accelerating towards the center of the earth at about 9.8m/s/s.</Block>
+    </Content>
+    <SimulationData>
+      <Simulation>
+        <fps>60</fps>
+        <g>20</g>
+        <gAD>1.5</gAD>
+        <r>5</r>
+        <ObjectData>
+          <Object>
+            <x>10</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>255</r>
+              <g>32</g>
+              <b>163</b>
+            </Color>
+            <Velocity>
+              <x>0</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
+          <Object>
+            <x>20</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>32</r>
+              <g>255</g>
+              <b>163</b>
+            </Color>
+            <Velocity>
+              <x>10</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
+          <Object>
+            <x>40</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>32</r>
+              <g>163</g>
+              <b>255</b>
+            </Color>
+            <Velocity>
+              <x>0</x>
+              <y>0</y>
+              <m>15</m>
+              <a>-45</a>
+            </Velocity>
+          </Object>
+        </ObjectData>
+      </Simulation>
+    </SimulationData>
+    <Content>
+      <Block>The balls above are falling at a constant acceleration of 20 units per second squared. The ball on the left starts from standstill, the ball in the center starts with an initial velocity of 10 u/s to the right, the ball on the right starts with an initial velocity of 15 u/s at a 45 degree angle upwards. The two balls on the right will have a constant horizontal velocity because they are not accelerating horizontaly.</Block>
+    </Content>
+  </Lesson>
+  <Lesson>
+    <Title>Calculating object's motions</Title>
+    <Content>
+      <Block>The goal of physics is to describe how things interact in nature. This means that physics employs a lot of math to calculate velocities, positions and much more.</Block>
+      <Block>To find an object's velocity or position given different parameters, physicist often use calculus, however in this class, we will be using algebra and trigonometry to solve our problems</Block>
+      <Block>To find the position of an object with a constant velocity at a certain time, we use the equation x = p0 + v*t, where p0 is the object's position at time 0. Finding the velocity of an object at a certain time given a constant acceleration is very similar, v = v0 + at where v0 is the original velocity of the object at time 0.</Block>
+      <Block>These equations are simple but don't allow us to solve for an objects position at a certain time, given the object's acceleration, initial velocity, and initial position. This is when we use the equation x = x0 + v0*t + (1/2)*a*(t^2). This equation allows us to calculate how much an object has fallen in a certain amount of time, or how far a car has traveled while accelerating from a stop.</Block>
+    </Content>
+    <SimulationData>
+      <Simulation>
+        <fps>60</fps>
+        <g>10</g>
+        <gAD>0</gAD>
+        <r>10</r>
+        <ObjectData>
+          <Object>
+            <x>10</x>
+            <y>30</y>
+            <r>3</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>163</r>
+              <g>255</g>
+              <b>32</b>
+            </Color>
+            <Velocity>
+              <x>10</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
+        </ObjectData>
+      </Simulation>
+    </SimulationData>
+    <Content>
+      <Block>The object above starts with an intial position of 0 u is accelerating at 10 u/s/s to the right with an initial velocity of 10 u/s to the right; what will be the object's position and velocity when t = 5. Find the answer for this question and then find the solution below.</Block>
+      <Block>Answer: At time t = 5, the object will have a velocity of 60 u/s and have a position of 175 units.</Block>
+    </Content>
   </Lesson>
 </ClassroomData>

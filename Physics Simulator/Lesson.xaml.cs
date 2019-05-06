@@ -47,9 +47,12 @@ namespace Physics_Simulator {
             GridCanvas.Children.Clear();
             GridCanvas.RowDefinitions.Clear();
             rowNum = 0;
-            
-            lroot = lroot.children.ElementAt(HUB.config - 1);
-            BuildFromTree(lroot);
+
+            if (lroot.children.Count >= HUB.config) { // make sure that if there isn't a lesson for this tab then don't print anything and crash
+
+                lroot = lroot.children.ElementAt(HUB.config - 1);
+                BuildFromTree(lroot);
+            }
         }
 
         private void BuildTextBox(bool title, string text, int id) { // simpler version without all the parameters
