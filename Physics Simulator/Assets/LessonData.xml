@@ -66,6 +66,32 @@
               <a>255</a>
               <r>255</r>
               <g>051</g>
+              <b>255</b>
+            </Color>
+            <Velocity id="0">
+              <x>10</x>
+              <y>00</y>
+              <m>00</m>
+              <a>00</a>
+            </Velocity>
+          </Oject>
+        </ObjectData>
+      </Simulation>
+      <Simulation>
+        <fps>60</fps>
+        <g>-5</g>
+        <gAD>-90</gAD>
+        <ObjectData>
+          <Oject id="0">
+            <x>10</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>0.5</e>
+            <Color>
+              <a>255</a>
+              <r>100</r>
+              <g>000</g>
               <b>087</b>
             </Color>
             <Velocity id="0">
@@ -86,5 +112,33 @@
       <Block>This is a small block</Block>
       <Block>This is a larger block with more things on it spam spam spam blah blah blah asldkjflasdlkjvlskjlksdjkc.d dsjflsd kdslds fdslsdkl fsd fds lksdj.</Block>
     </Content>
+    <SimulationData>
+      <Simulation>
+        <fps>60</fps>
+        <g>-5</g>
+        <gAD>-90</gAD>
+        <ObjectData>
+          <Oject id="0">
+            <x>10</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>0.5</e>
+            <Color>
+              <a>255</a>
+              <r>000</r>
+              <g>250</g>
+              <b>150</b>
+            </Color>
+            <Velocity id="0">
+              <x>10</x>
+              <y>00</y>
+              <m>00</m>
+              <a>00</a>
+            </Velocity>
+          </Oject>
+        </ObjectData>
+      </Simulation>
+    </SimulationData>
   </Lesson>
 </ClassroomData>

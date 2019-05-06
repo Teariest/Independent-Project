@@ -25,6 +25,8 @@ namespace Physics_Simulator {
         private EngineCircle[] eObjects; // Engine Objects
         private Vector[] vectors;
 
+        private XMLTree pLocalRoot;
+
         private int fps = 60; // Frames per second
         private double g = -5; // Gravity of simulation
         private double gA = -Math.PI / 2; // Direction of Gravity
@@ -68,6 +70,7 @@ namespace Physics_Simulator {
         private void Reset(object sender, object e) {
             
             SimCanvas.Children.Clear();
+
             BuildLessonSim();
             simEngine = new Engine(eObjects, vectors, fps, g, gA);
         }
@@ -166,7 +169,10 @@ namespace Physics_Simulator {
 
             else { // if using xml file
 
-                XMLTree rn = HUB.simRoot; // sim node (not list)
+                if (pLocalRoot == null) {
+                    pLocalRoot = HUB.simRoot.Duplicate();
+                }
+                XMLTree rn = pLocalRoot.Duplicate(); // sim node (not list)
 
                 fps = int.Parse(rn.children.ElementAt(0).content);
                 g = double.Parse(rn.children.ElementAt(1).content);
