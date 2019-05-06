@@ -25,16 +25,14 @@
               <g>051</g>
               <b>087</b>
             </Color>
+            <Velocity id="0">
+              <x>10</x>
+              <y>00</y>
+              <m>00</m>
+              <a>00</a>
+            </Velocity>
           </Oject>
         </ObjectData>
-        <VelocityData>
-          <Velocity id="0">
-            <x>10</x>
-            <y>00</y>
-            <m>00</m>
-            <a>00</a>
-          </Velocity>
-        </VelocityData>
       </Simulation>
     </SimulationData>
   </Lesson>

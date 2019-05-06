@@ -52,7 +52,7 @@ namespace Physics_Simulator {
             // config starts at 1
             if (HUB.config == 1) {
                 lroot = lroot.children.ElementAt(0);
-                BuildFromTree(lroot, "");
+                BuildFromTree(lroot);
             }
         }
 
@@ -92,17 +92,7 @@ namespace Physics_Simulator {
             rowNum++;
         }
 
-        private void BuildSimulationFrame() {
-
-            HUB.simRoot
-
-            Frame sim = new Frame();
-            sim.Navigate(typeof(SimulationPage));
-
-
-        }
-
-        private void BuildFromTree(XMLTree node, string p) {
+        private void BuildFromTree(XMLTree node) {
             
             if (node.tagName.Equals("Title")) {
 
@@ -127,16 +117,22 @@ namespace Physics_Simulator {
 
                     Frame sim = new Frame();
                     sim.Navigate(typeof(SimulationPage));
+
+                    GridCanvas.RowDefinitions.Add(new RowDefinition());
+                    GridCanvas.RowDefinitions.ElementAt(rowNum).Height = new GridLength(1, GridUnitType.Auto);
+
+
+                    GridCanvas.Children.Add(sim);
+                    sim.SetValue(Grid.RowProperty, rowNum);
+                    sim.SetValue(Grid.ColumnProperty, 0);
+
+                    rowNum++;
                 }
-            }
-
-            else if (p.Equals("SimulationData")) {
-
             }
 
             else {
                 foreach(XMLTree n in node.children) {
-                    BuildFromTree(n, "");
+                    BuildFromTree(n);
                 }
             }
         }

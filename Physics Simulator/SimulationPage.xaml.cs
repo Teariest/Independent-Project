@@ -150,40 +150,41 @@ namespace Physics_Simulator {
                 }
             }
 
-            else {
+            else { // if using xml file
 
-                XMLTree r = HUB.simRoot;
+                XMLTree rn = HUB.simRoot; // sim node (not list)
 
-                foreach(XMLTree n in r.children) {
+                fps = int.Parse(rn.children.ElementAt(0).content);
+                g = double.Parse(rn.children.ElementAt(1).content);
+                gA = double.Parse(rn.children.ElementAt(2).content);
 
-                    if (n.tagName.Equals("fps")) {
-                        fps = int.Parse(n.content);
-                    }
+                XMLTree o = rn.children.ElementAt(3); // object list
 
-                    if (n.tagName.Equals("g")) {
-                        g = int.Parse(n.content);
-                    }
+                int c = o.children.Count;
+                UIObjects = new Ellipse[c];
+                eObjects = new EngineCircle[c];
+                vectors = new Vector[c];
 
-                    if (n.tagName.Equals("gAD")) {
-                        gA = int.Parse(n.content);
-                    }
+                int i = 0;
+                foreach(XMLTree n in o.children) { // foreach object
 
-                    if (n.tagName.Equals("ObjectData")) {
-
-                        foreach (XMLTree m in n.children) {
-                            ///////////////////////
-                        }
-                    }
-
-                    if (n.tagName.Equals("VelocityData")) {
-
-                        foreach (XMLTree m in n.children) {
-                            /////////////////////////////
-                        }
-                    }
+                    BuildEllipse(i, // index
+                        double.Parse(n.children.ElementAt(0).content), // xPos
+                        double.Parse(n.children.ElementAt(1).content), // yPos
+                        double.Parse(n.children.ElementAt(2).content), // radius
+                        byte.Parse(n.children.ElementAt(5).children.ElementAt(0).content), // a
+                        byte.Parse(n.children.ElementAt(5).children.ElementAt(1).content), // r
+                        byte.Parse(n.children.ElementAt(5).children.ElementAt(2).content), // g
+                        byte.Parse(n.children.ElementAt(5).children.ElementAt(3).content), // b
+                        double.Parse(n.children.ElementAt(6).children.ElementAt(2).content), // mag
+                        double.Parse(n.children.ElementAt(6).children.ElementAt(3).content), // angle
+                        double.Parse(n.children.ElementAt(6).children.ElementAt(0).content), // xV
+                        double.Parse(n.children.ElementAt(6).children.ElementAt(1).content), // yV
+                        double.Parse(n.children.ElementAt(3).content), // mass
+                        double.Parse(n.children.ElementAt(4).content)); // e
+                    i++;
                 }
-
-                // get data into simulator
+                
             }
         }
 
