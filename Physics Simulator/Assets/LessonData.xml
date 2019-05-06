@@ -213,4 +213,56 @@
       <Block>Answer: At time t = 5, the object will have a velocity of 60 u/s and have a position of 175 units.</Block>
     </Content>
   </Lesson>
+  <Lesson>
+    <Title>2D Kinematics</Title>
+    <Content>
+      <Block>Now that we have seen how position, velocity and acceleration are related, it is time to add one more dimmension of complexity. 2D kinematics bring one complication to what we have learned to this point; how do we represent velocity and acceleration that isn't perpendicular to the axes.</Block>
+      <Block>It turns out that the best way to represent these multi-dimensional scalar value is through vectors. This means that all velocity or acceleration in a 2D environment has both a horizontal and vertical component.</Block>
+      <Block>So how do we separate these values into their components? The answer is trigonometry. Quite simply, given a velocity or acceleration value and the angle of this vector to the x-axis, we can find the x and y components.</Block>
+    </Content>
+      <SimulationData>
+        <Simulation>
+          <fps>60</fps>
+          <g>0</g>
+          <gAD>0</gAD>
+          <r>6</r>
+          <ObjectData>
+            <Object>
+              <x>45</x>
+              <y>30</y>
+              <r>2</r>
+              <m>1</m>
+              <e>1</e>
+              <Color>
+                <a>255</a>
+                <r>21</r>
+                <g>232</g>
+                <b>224</b>
+              </Color>
+              <Velocity>
+                <x>10</x>
+                <y>-10</y>
+                <m>0</m>
+                <a>0</a>
+              </Velocity>
+            </Object>
+          </ObjectData>
+        </Simulation>
+      </SimulationData>
+    <Content>
+      <Block>Here is an example: the ball above is travelling at a constant velocity of 5 m/s (not to scale) at 45 degrees from the x-axis. Given the magnitude of the velocity (m), and the angle of the velocity from the x-axis (q), we are able to find the horizontal and vertical components (hc and vc respectively). Here are the equations: hc = m*cos(q) and vc = m*sin(q). What are the vertical and horizontal components of the ball's velocity?</Block>
+      <Block>Answer: The ball is moving right at a speed of 3.53 m/s, the ball is moving up at the same speed.</Block>
+      <Block>Treating these values like vectors allows us to use vector addition and substraction if we need to add velocities and accelerations together to find the end result. After finding the individual horizontal and vertical components, solve for all value's vertical and horizontal components independently</Block>
+    </Content>
+    <Title>Now how to put these components together?</Title>
+    <Content>
+      <Block>To put these components together, we simply have to use the pythagorean theorem: m^2 = hc^2 + vc^2.</Block>
+    </Content>
+  </Lesson>
+  <Lesson>
+    <Title>Forces</Title>
+    <Content>
+      <Block></Block>
+    </Content>
+  </Lesson>
 </ClassroomData>

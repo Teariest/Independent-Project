@@ -81,15 +81,14 @@ namespace Physics_Simulator {
                 else { BLA(); }
                 PrevSelect = 3;
             }
-
-            /*
+            
             else if (MenuItem4.IsSelected || (reset && PrevSelect == 4)) {
                 HUB.config = 4;
                 if (HUB.usingPreBuiltLessons) LessonFrame.Navigate(typeof(Lesson3));
                 else { BLA(); }
                 PrevSelect = 4;
             }
-
+            /*
             else if (MenuItem5.IsSelected || (reset && PrevSelect == 5)) {
                 HUB.config = 5;
                 if (HUB.usingPreBuiltLessons) LessonFrame.Navigate(typeof(Lesson5));

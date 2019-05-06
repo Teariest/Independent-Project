@@ -42,8 +42,6 @@
                         <TextBlock Style="{StaticResource MenuTextStyle}" Text="Calculations"/>
                     </StackPanel>
                 </ListBoxItem>
-                
-                <!--
 
                 <ListBoxItem Name="MenuItem4" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
@@ -51,7 +49,8 @@
                         <TextBlock Style="{StaticResource MenuTextStyle}" Text="Forces"/>
                     </StackPanel>
                 </ListBoxItem>
-
+                
+                <!--
                 <ListBoxItem Name="MenuItem5" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
