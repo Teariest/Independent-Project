@@ -20,22 +20,29 @@ using Physics_Simulator.ViewModel;
 namespace Physics_Simulator {
 
     public sealed partial class SimulationPage : Page {
+        // Physics Engine
+        private Engine simEngine;
 
+        // Objects
         private Ellipse[] UIObjects; // Visual Representations of object
         private EngineCircle[] eObjects; // Engine Objects
         private Vector[] vectors;
 
-        private XMLTree pLocalRoot;
-
+        // Environment
         private int fps = 60; // Frames per second
         private double g = -5; // Gravity of simulation
         private double gA = -Math.PI / 2; // Direction of Gravity
 
+        // XML Root
+        private XMLTree pLocalRoot;
+
+        // Dispatch
         private DispatcherTimer timer; // Timer that requests engine to calculate and move objects at every interval
         private DispatcherTimer resetTimer; // Timer to reset engine
-        int resetTime = 7; // Reset interval in seconds
+        private int resetTime = 7; // Reset interval in seconds
 
-        private Engine simEngine; // Physics Engine
+        // User Editing
+        private int[,] targets;
 
         public SimulationPage() {
             this.InitializeComponent();
@@ -172,8 +179,9 @@ namespace Physics_Simulator {
                 if (pLocalRoot == null) {
                     pLocalRoot = HUB.simRoot.Duplicate();
                 }
-                XMLTree rn = pLocalRoot.Duplicate(); // sim node (not list)
+                XMLTree rn = pLocalRoot.Duplicate(); // sim node (not sim list but <Simulation>)
 
+                // setup environment
                 fps = int.Parse(rn.children.ElementAt(0).content);
                 g = double.Parse(rn.children.ElementAt(1).content);
                 gA = double.Parse(rn.children.ElementAt(2).content);
@@ -181,13 +189,14 @@ namespace Physics_Simulator {
 
                 XMLTree o = rn.children.ElementAt(4); // object list
 
+                // setup build ellipse
                 int c = o.children.Count;
                 UIObjects = new Ellipse[c];
                 eObjects = new EngineCircle[c];
                 vectors = new Vector[c];
 
                 int i = 0;
-                foreach(XMLTree n in o.children) { // foreach object
+                foreach(XMLTree n in o.children) { // foreach object in simulation, build ellipse
 
                     BuildEllipse(i, // index
                         double.Parse(n.children.ElementAt(0).content), // xPos
@@ -206,6 +215,17 @@ namespace Physics_Simulator {
                     i++;
                 }
                 
+                if (rn.children.Count == 6) { // If simulation has UserEdits
+
+                    o = rn.children.ElementAt(5); // UserEdits list
+
+                    targets = new int[,] { new int[], new int[]};
+
+                    foreach (XMLTree n in o.children) {
+
+
+                    }
+                }
             }
         }
 

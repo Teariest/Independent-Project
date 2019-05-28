@@ -34,6 +34,12 @@
             </Velocity>
           </Object>
         </ObjectData>
+        <UserEdit>
+          <Object>
+            <objectID>0</objectID>
+            <target>0</target>
+          </Object>
+        </UserEdit>
       </Simulation>
     </SimulationData>
     <Content>
