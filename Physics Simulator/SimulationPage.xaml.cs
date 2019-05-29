@@ -219,11 +219,18 @@ namespace Physics_Simulator {
 
                     o = rn.children.ElementAt(5); // UserEdits list
 
-                    targets = new int[,] { new int[], new int[]};
+                    List<int[]> targetList = new List<int[]>(o.children.Count);
 
-                    foreach (XMLTree n in o.children) {
+                    foreach (XMLTree n in o.children) { // n = object tag
 
+                        int[] tempArray = new int[n.children.Count];
 
+                        for (i = 0; i < n.children.Count; i++) { // goes through each value(within a tag) within object tag (object n)
+
+                            tempArray[i] = int.Parse(n.children.ElementAt(i).content);
+                        }
+
+                        targetList.Add(tempArray);
                     }
                 }
             }
