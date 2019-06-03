@@ -9,7 +9,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Canvas x:Name="SimCanvas">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <Canvas Grid.Column="0" x:Name="SimCanvas">
             <!-- For testing elasticities
             <TextBlock Canvas.Left="1000" Canvas.Top="100" Text="0 Elasticity" TextWrapping="Wrap"/>
             <TextBlock Canvas.Left="1000" Canvas.Top="200" Text="0.5 Elasticity" TextWrapping="Wrap"/>
@@ -18,5 +23,8 @@
             <TextBlock Canvas.Left="1000" Canvas.Top="500" Text="1 Elasticity" TextWrapping="Wrap"/>
             -->
         </Canvas>
+        <StackPanel Grid.Column="1" x:Name="SimStackPanel" Orientation="Vertical">
+            
+        </StackPanel>
     </Grid>
 </Page>

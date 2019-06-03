@@ -259,5 +259,9 @@ namespace Physics_Simulator {
             BuildEllipse(10, 20, 60, 2, 255, 250, 250, 000, 0, 0, 00, 00, 1, 1.0);
             // | CHANGE SIZE OF ARRAY WHEN ADDING OR REMOVING OBJECT |
         }
+
+        private void BuildUserInteractions() {
+            SimStackPanel.Children.Add()
+        }
     }
 }
