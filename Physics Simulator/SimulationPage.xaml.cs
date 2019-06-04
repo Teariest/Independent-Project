@@ -42,7 +42,7 @@ namespace Physics_Simulator {
         private int resetTime = 7; // Reset interval in seconds
 
         // User Editing
-        private int[,] targets;
+        private int[][] targets;
 
         public SimulationPage() {
             this.InitializeComponent();
@@ -218,7 +218,7 @@ namespace Physics_Simulator {
                 if (rn.children.Count == 6) { // If simulation has UserEdits
 
                     o = rn.children.ElementAt(5); // UserEdits list
-
+                    
                     List<int[]> targetList = new List<int[]>(o.children.Count);
 
                     foreach (XMLTree n in o.children) { // n = object tag
@@ -228,10 +228,19 @@ namespace Physics_Simulator {
                         for (i = 0; i < n.children.Count; i++) { // goes through each value(within a tag) within object tag (object n)
 
                             tempArray[i] = int.Parse(n.children.ElementAt(i).content);
+                            
+                            TextBox b = new TextBox();
+                            b.InputScope = new InputScope();
+                            b.InputScope.Names = new List<InputScopeName>();
+                            b.InputScope.Names.Add(new InputScopeName(InputScopeNameValue.Number));
+
+                            SimStackPanel.Children.Add(b);
                         }
 
                         targetList.Add(tempArray);
                     }
+
+                    targets = targetList.ToArray();
                 }
             }
         }
@@ -260,8 +269,20 @@ namespace Physics_Simulator {
             // | CHANGE SIZE OF ARRAY WHEN ADDING OR REMOVING OBJECT |
         }
 
-        private void BuildUserInteractions() {
-            SimStackPanel.Children.Add()
+        private void GetUserInteractions() {
+            
+        }
+
+        private void ChangeUserInteractions() {
+
+            int boxID = 0; // ID of box we need to change
+
+            for (int i = 0; i < targets.Length; i++) {
+
+                for (int j = 0; j < targets[i].Length; j++) {
+                    
+                }
+            }
         }
     }
 }
