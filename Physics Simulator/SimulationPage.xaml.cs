@@ -65,6 +65,11 @@ namespace Physics_Simulator {
             resetTimer.Start();
         }
 
+        // Everytime that the simulation is built, so when SimulationPage is initialized or 
+        private void Build() {
+
+        }
+
         /// <summary>
         /// Runs once for every frame, changes everything that has to be changed during the frame
         /// </summary>
@@ -78,7 +83,8 @@ namespace Physics_Simulator {
             
             SimCanvas.Children.Clear();
 
-            BuildLessonSim();
+            if (HUB.testingSimulator) { BuildDebugSim(); } // DEBUG
+            else { BuildLessonSim(); }                     // LESSONS
             simEngine = new Engine(eObjects, vectors, fps, g, gA);
         }
 
@@ -214,7 +220,11 @@ namespace Physics_Simulator {
                         double.Parse(n.children.ElementAt(4).content)); // e
                     i++;
                 }
-                
+
+                // UserEdits
+
+                SimStackPanel.Children.Clear();
+
                 if (rn.children.Count == 6) { // If simulation has UserEdits
 
                     o = rn.children.ElementAt(5); // UserEdits list
@@ -230,11 +240,12 @@ namespace Physics_Simulator {
                             tempArray[i] = int.Parse(n.children.ElementAt(i).content);
                             
                             TextBox b = new TextBox();
-                            b.InputScope = new InputScope();
-                            b.InputScope.Names = new List<InputScopeName>();
-                            b.InputScope.Names.Add(new InputScopeName(InputScopeNameValue.Number));
+                            b.Width = 80;
+                            b.CharacterReceived += NumberOnlyFilter;
 
-                            SimStackPanel.Children.Add(b);
+                            if (i != 0) { // If looking at target ID, not object ID, make an input box for that target
+                                SimStackPanel.Children.Add(b);
+                            }
                         }
 
                         targetList.Add(tempArray);
@@ -242,6 +253,23 @@ namespace Physics_Simulator {
 
                     targets = targetList.ToArray();
                 }
+
+                // Add a reset Button
+
+                Button resetB = new Button();
+                resetB.Content = "Reset";
+                resetB.Width = 80;
+                resetB.Click += Reset;
+                SimStackPanel.Children.Add(resetB);
+            }
+        }
+
+        // Every Time a new charachter is entered into one of the TextBoxes, then this method is called and removes
+        //the new charachter if it isn't a number, backspace/enter, or a '.'
+        private void NumberOnlyFilter(UIElement element, CharacterReceivedRoutedEventArgs argument) {
+            Debug.WriteLine(argument.Character.ToString());
+            if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals("\b") && ((TextBox)element).Text.Length != 0) { // If the user input isn't a number then remove it
+                ((TextBox) element).Text = ((TextBox)element).Text.Substring(0, ((TextBox)element).Text.Length - 1);
             }
         }
 
