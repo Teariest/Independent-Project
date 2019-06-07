@@ -44,6 +44,14 @@ namespace Physics_Simulator {
         // User Editing
         private int[][] targets;
 
+
+        // Fields
+        // ------------------------------------------------------------------------->
+        // Methods
+
+
+
+        // Constructor
         public SimulationPage() {
             this.InitializeComponent();
 
@@ -65,20 +73,19 @@ namespace Physics_Simulator {
             resetTimer.Start();
         }
 
-        // Everytime that the simulation is built, so when SimulationPage is initialized or 
+        // Build the simulation from the xml data
         private void Build() {
 
         }
-
-        /// <summary>
-        /// Runs once for every frame, changes everything that has to be changed during the frame
-        /// </summary>
+        
+        // Runs once for every frame, changes everything that has to be changed during the frame
         private void Dispatch(object sender, object e) {
             
             simEngine.ExecuteNext();
             RefreshDisplay();
         }
 
+        // Re-builds the entire simulation
         private void Reset(object sender, object e) {
             
             SimCanvas.Children.Clear();
@@ -89,17 +96,15 @@ namespace Physics_Simulator {
         }
 
         private void RefreshDisplay() {
-            EngineCircle[] pos = simEngine.Positions();
+            EngineCircle[] pos = simEngine.Positions(); // retrieve all object positions from the engine
 
-            for (int i = 0; i < pos.Length; i++) {
+            for (int i = 0; i < pos.Length; i++) { // Display all object positions
                 UIObjects[i].SetValue(Canvas.LeftProperty, (pos[i].GetXPos() - pos[i].GetRadius()) * 10);
                 UIObjects[i].SetValue(Canvas.TopProperty, (pos[i].GetYPos() - pos[i].GetRadius()) * 10);
             }
         }
-
-        /// <summary>
-        /// Variables are in meters, meters per second, degrees and kilograms
-        /// </summary>
+        
+        // Variables are in meters, meters per second, degrees and kilograms
         public void BuildEllipse(int index, double xPos, double yPos, double radius, byte a, byte r, byte g, byte b, double magnitude, double angle, double xV, double yV, double mass, double elasticity) {
             UIObjects[index] = new Ellipse();
             UIObjects[index].Height = radius*20;
@@ -112,6 +117,7 @@ namespace Physics_Simulator {
             vectors[index] = new Vector(magnitude, angle, xV, yV);
         }
 
+        // Build the simulation for the pre-built lesson xaml pages
         public void BuildLessonSim() {
 
             if (HUB.usingPreBuiltLessons) {
@@ -265,14 +271,15 @@ namespace Physics_Simulator {
         }
 
         // Every Time a new charachter is entered into one of the TextBoxes, then this method is called and removes
-        //the new charachter if it isn't a number, backspace/enter, or a '.'
+        // The new charachter if it isn't a number, backspace/enter, or a '.'
         private void NumberOnlyFilter(UIElement element, CharacterReceivedRoutedEventArgs argument) {
             Debug.WriteLine(argument.Character.ToString());
-            if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals("\b") && ((TextBox)element).Text.Length != 0) { // If the user input isn't a number then remove it
+            if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals('\b') && ((TextBox)element).Text.Length != 0) { // If the user input isn't a number then remove it
                 ((TextBox) element).Text = ((TextBox)element).Text.Substring(0, ((TextBox)element).Text.Length - 1);
             }
         }
 
+        // Build Simulation to Debug the engine
         public void BuildDebugSim() {
 
             int numObjects = 11;
@@ -297,10 +304,12 @@ namespace Physics_Simulator {
             // | CHANGE SIZE OF ARRAY WHEN ADDING OR REMOVING OBJECT |
         }
 
+        // TODO?
         private void GetUserInteractions() {
             
         }
 
+        // TODO?
         private void ChangeUserInteractions() {
 
             int boxID = 0; // ID of box we need to change
