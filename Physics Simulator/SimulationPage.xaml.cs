@@ -55,13 +55,9 @@ namespace Physics_Simulator {
         public SimulationPage() {
             this.InitializeComponent();
 
-            if (HUB.testingSimulator) { BuildDebugSim(); } // DEBUG
-            else { BuildLessonSim(); }                     // LESSONS
-            
-            // Build Engine
-            simEngine = new Engine(eObjects, vectors, fps, g, gA);
+            Build(); // Build Sim
 
-            // Build Dispatcher
+            // Build Dispatcher, should only be called one SimulationPage is built so keep within constructor
             timer = new DispatcherTimer();
             timer.Tick += Dispatch;
             timer.Interval = new TimeSpan(0, 0, 0, 0, (1000 / fps));
@@ -73,26 +69,30 @@ namespace Physics_Simulator {
             resetTimer.Start();
         }
 
-        // Build the simulation from the xml data
+        // Build the Sim but not the timing elements, root build method, can be used from any point
         private void Build() {
 
+            // Sets up all of the engine's parameters
+            if (HUB.testingSimulator) { SetupDebugSim(); } // Build Debug Sim
+            else if (HUB.usingPreBuiltLessons) { SetupSimFromPrebuildLesson(); } // Build Pre-Built Lesson Sims
+            else { SetupSim(); } // Build Sims based off of xml file
+
+            // Build Engine
+            simEngine = new Engine(eObjects, vectors, fps, g, gA);
         }
         
-        // Runs once for every frame, changes everything that has to be changed during the frame
+        // Runs once for every frame, changes everything that has to be changed during the frame, called by dispatcher
         private void Dispatch(object sender, object e) {
             
             simEngine.ExecuteNext();
             RefreshDisplay();
         }
 
-        // Re-builds the entire simulation
+        // Re-builds the entire simulation, gets called by dispatcher
         private void Reset(object sender, object e) {
             
             SimCanvas.Children.Clear();
-
-            if (HUB.testingSimulator) { BuildDebugSim(); } // DEBUG
-            else { BuildLessonSim(); }                     // LESSONS
-            simEngine = new Engine(eObjects, vectors, fps, g, gA);
+            Build();
         }
 
         private void RefreshDisplay() {
@@ -118,9 +118,7 @@ namespace Physics_Simulator {
         }
 
         // Build the simulation for the pre-built lesson xaml pages
-        public void BuildLessonSim() {
-
-            if (HUB.usingPreBuiltLessons) {
+        public void SetupSimFromPrebuildLesson() {
 
                 int n = 0;
 
@@ -184,103 +182,96 @@ namespace Physics_Simulator {
                         g = 0;
                         break;
                 }
+            
+
+            
             }
 
-            else { // if using xml file
+        public void SetupSim() {
 
-                if (pLocalRoot == null) {
-                    pLocalRoot = HUB.simRoot.Duplicate();
-                }
-                XMLTree rn = pLocalRoot.Duplicate(); // sim node (not sim list but <Simulation>)
+            if (pLocalRoot == null) {
+                pLocalRoot = HUB.simRoot.Duplicate();
+            }
+            XMLTree rn = pLocalRoot.Duplicate(); // sim node (not sim list but <Simulation>)
 
-                // setup environment
-                fps = int.Parse(rn.children.ElementAt(0).content);
-                g = double.Parse(rn.children.ElementAt(1).content);
-                gA = double.Parse(rn.children.ElementAt(2).content);
-                resetTime = int.Parse(rn.children.ElementAt(3).content);
+            // setup environment
+            fps = int.Parse(rn.children.ElementAt(0).content);
+            g = double.Parse(rn.children.ElementAt(1).content);
+            gA = double.Parse(rn.children.ElementAt(2).content);
+            resetTime = int.Parse(rn.children.ElementAt(3).content);
 
-                XMLTree o = rn.children.ElementAt(4); // object list
+            XMLTree o = rn.children.ElementAt(4); // object list
 
-                // setup build ellipse
-                int c = o.children.Count;
-                UIObjects = new Ellipse[c];
-                eObjects = new EngineCircle[c];
-                vectors = new Vector[c];
+            // setup build ellipse
+            int c = o.children.Count;
+            UIObjects = new Ellipse[c];
+            eObjects = new EngineCircle[c];
+            vectors = new Vector[c];
 
-                int i = 0;
-                foreach(XMLTree n in o.children) { // foreach object in simulation, build ellipse
+            int i = 0;
+            foreach (XMLTree n in o.children) { // foreach object in simulation, build ellipse
 
-                    BuildEllipse(i, // index
-                        double.Parse(n.children.ElementAt(0).content), // xPos
-                        double.Parse(n.children.ElementAt(1).content), // yPos
-                        double.Parse(n.children.ElementAt(2).content), // radius
-                        byte.Parse(n.children.ElementAt(5).children.ElementAt(0).content), // a
-                        byte.Parse(n.children.ElementAt(5).children.ElementAt(1).content), // r
-                        byte.Parse(n.children.ElementAt(5).children.ElementAt(2).content), // g
-                        byte.Parse(n.children.ElementAt(5).children.ElementAt(3).content), // b
-                        double.Parse(n.children.ElementAt(6).children.ElementAt(2).content), // mag
-                        double.Parse(n.children.ElementAt(6).children.ElementAt(3).content), // angle
-                        double.Parse(n.children.ElementAt(6).children.ElementAt(0).content), // xV
-                        double.Parse(n.children.ElementAt(6).children.ElementAt(1).content), // yV
-                        double.Parse(n.children.ElementAt(3).content), // mass
-                        double.Parse(n.children.ElementAt(4).content)); // e
-                    i++;
-                }
+                BuildEllipse(i, // index
+                    double.Parse(n.children.ElementAt(0).content), // xPos
+                    double.Parse(n.children.ElementAt(1).content), // yPos
+                    double.Parse(n.children.ElementAt(2).content), // radius
+                    byte.Parse(n.children.ElementAt(5).children.ElementAt(0).content), // a
+                    byte.Parse(n.children.ElementAt(5).children.ElementAt(1).content), // r
+                    byte.Parse(n.children.ElementAt(5).children.ElementAt(2).content), // g
+                    byte.Parse(n.children.ElementAt(5).children.ElementAt(3).content), // b
+                    double.Parse(n.children.ElementAt(6).children.ElementAt(2).content), // mag
+                    double.Parse(n.children.ElementAt(6).children.ElementAt(3).content), // angle
+                    double.Parse(n.children.ElementAt(6).children.ElementAt(0).content), // xV
+                    double.Parse(n.children.ElementAt(6).children.ElementAt(1).content), // yV
+                    double.Parse(n.children.ElementAt(3).content), // mass
+                    double.Parse(n.children.ElementAt(4).content)); // e
+                i++;
+            }
 
-                // UserEdits
+            // UserEdits
 
-                SimStackPanel.Children.Clear();
+            SimStackPanel.Children.Clear();
 
-                if (rn.children.Count == 6) { // If simulation has UserEdits
+            if (rn.children.Count == 6) { // If simulation has UserEdits
 
-                    o = rn.children.ElementAt(5); // UserEdits list
-                    
-                    List<int[]> targetList = new List<int[]>(o.children.Count);
+                o = rn.children.ElementAt(5); // UserEdits list
 
-                    foreach (XMLTree n in o.children) { // n = object tag
+                List<int[]> targetList = new List<int[]>(o.children.Count);
 
-                        int[] tempArray = new int[n.children.Count];
+                foreach (XMLTree n in o.children) { // n = object tag
 
-                        for (i = 0; i < n.children.Count; i++) { // goes through each value(within a tag) within object tag (object n)
+                    int[] tempArray = new int[n.children.Count];
 
-                            tempArray[i] = int.Parse(n.children.ElementAt(i).content);
-                            
-                            TextBox b = new TextBox();
-                            b.Width = 80;
-                            b.CharacterReceived += NumberOnlyFilter;
+                    for (i = 0; i < n.children.Count; i++) { // goes through each value(within a tag) within object tag (object n)
 
-                            if (i != 0) { // If looking at target ID, not object ID, make an input box for that target
-                                SimStackPanel.Children.Add(b);
-                            }
+                        tempArray[i] = int.Parse(n.children.ElementAt(i).content);
+
+                        TextBox b = new TextBox();
+                        b.Width = 80;
+                        b.CharacterReceived += TextBoxHandler;
+
+                        if (i != 0) { // If looking at target ID, not object ID, make an input box for that target
+                            SimStackPanel.Children.Add(b);
                         }
-
-                        targetList.Add(tempArray);
                     }
 
-                    targets = targetList.ToArray();
+                    targetList.Add(tempArray);
                 }
 
-                // Add a reset Button
-
-                Button resetB = new Button();
-                resetB.Content = "Reset";
-                resetB.Width = 80;
-                resetB.Click += Reset;
-                SimStackPanel.Children.Add(resetB);
+                targets = targetList.ToArray();
             }
-        }
 
-        // Every Time a new charachter is entered into one of the TextBoxes, then this method is called and removes
-        // The new charachter if it isn't a number, backspace/enter, or a '.'
-        private void NumberOnlyFilter(UIElement element, CharacterReceivedRoutedEventArgs argument) {
-            Debug.WriteLine(argument.Character.ToString());
-            if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals('\b') && ((TextBox)element).Text.Length != 0) { // If the user input isn't a number then remove it
-                ((TextBox) element).Text = ((TextBox)element).Text.Substring(0, ((TextBox)element).Text.Length - 1);
-            }
+            // Add a reset Button
+
+            Button resetB = new Button();
+            resetB.Content = "Reset";
+            resetB.Width = 80;
+            resetB.Click += Reset;
+            SimStackPanel.Children.Add(resetB);
         }
 
         // Build Simulation to Debug the engine
-        public void BuildDebugSim() {
+        public void SetupDebugSim() {
 
             int numObjects = 11;
 
@@ -304,22 +295,18 @@ namespace Physics_Simulator {
             // | CHANGE SIZE OF ARRAY WHEN ADDING OR REMOVING OBJECT |
         }
 
-        // TODO?
-        private void GetUserInteractions() {
-            
+        // Handles inputs from TextBox
+        private void TextBoxHandler(UIElement element, CharacterReceivedRoutedEventArgs argument) {
+            if (argument.Character.GetHashCode() != 851981) { // If user presses enter into the textbox
+                // make input a reality
+            }
+            else if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals('\b') && ((TextBox)element).Text.Length != 0) { // If the user input isn't a number then remove it
+                ((TextBox)element).Text = ((TextBox)element).Text.Substring(0, ((TextBox)element).Text.Length - 1);
+            }
         }
 
-        // TODO?
-        private void ChangeUserInteractions() {
+        private void ChangeSimulation(int o, int target) {
 
-            int boxID = 0; // ID of box we need to change
-
-            for (int i = 0; i < targets.Length; i++) {
-
-                for (int j = 0; j < targets[i].Length; j++) {
-                    
-                }
-            }
         }
     }
 }
