@@ -236,29 +236,45 @@ namespace Physics_Simulator {
 
                 o = rn.children.ElementAt(5); // UserEdits list
 
-                List<int[]> targetList = new List<int[]>(o.children.Count);
+                List<int[]> targetList = new List<int[]>(o.children.Count); // List of arrays that will be added to int[][] targets
+                
+                foreach(XMLTree n in o.children) { // for each object available for edit
 
-                foreach (XMLTree n in o.children) { // n = object tag
+                    int objectID; // ObjectID from xml
 
-                    int[] tempArray = new int[n.children.Count];
+                    // If the ObjectID from the xml is not valid, then throw an exception
+                    if ((!int.TryParse(n.children.ElementAt(0).content, out objectID)) || objectID >= eObjects.Length) {
+                        throw new InvalidDataException("XML format error: <objectID>" + n.children.ElementAt(0).content + "</objectID>. " + n.children.ElementAt(0).content + " is not a valid objectID.");
+                    }
+                    
+                    int[] tempArray = new int[n.children.Count]; // array to be added to targetList
 
-                    for (i = 0; i < n.children.Count; i++) { // goes through each value(within a tag) within object tag (object n)
+                    tempArray[0] = objectID;
 
-                        tempArray[i] = int.Parse(n.children.ElementAt(i).content);
+                    for (i = 1; i < n.children.Count; i++) { // goes through each target of object available for edit
 
-                        TextBox b = new TextBox();
-                        b.Width = 80;
-                        b.CharacterReceived += TextBoxHandler;
+                        int target; // targeted value ID of taret object from xml
 
-                        if (i != 0) { // If looking at target ID, not object ID, make an input box for that target
-                            SimStackPanel.Children.Add(b);
+                        // If the target tag's content from the xml is not valid then throw an exception
+                        if ((!int.TryParse(n.children.ElementAt(i).content, out target)) || target > 13) {
+                            throw new InvalidDataException("XML format error: <target>" + n.children.ElementAt(i).content + "</target>. " + n.children.ElementAt(i).content + " is not a valid target.");
                         }
+
+                        tempArray[i] = target; // add <target> value to array
+
+                        // Setup the TextBox user will input values into
+                        TextBox b = new TextBox();
+                        b.Width = 80; // set width of box to 80 pixels
+                        b.CharacterReceived += TextBoxHandler; // call handler when new character is received
+                        b.AccessKey += objectID; // add objectID # to box access key, access key is like a name for the textbox
+
+                        SimStackPanel.Children.Add(b);
                     }
 
-                    targetList.Add(tempArray);
+                    targetList.Add(tempArray); // add array to list
                 }
 
-                targets = targetList.ToArray();
+                targets = targetList.ToArray(); // targets = list
             }
 
             // Add a reset Button
@@ -297,16 +313,23 @@ namespace Physics_Simulator {
 
         // Handles inputs from TextBox
         private void TextBoxHandler(UIElement element, CharacterReceivedRoutedEventArgs argument) {
-            if (argument.Character.GetHashCode() != 851981) { // If user presses enter into the textbox
-                // make input a reality
+
+            if (((TextBox)element).Text.Length == 0) { return; } // if nothing is entered, don't do anything
+
+            if (argument.Character.GetHashCode() == 851981) { // If user presses enter into the textbox
+                int r;
+                if (int.TryParse(((TextBox)element).Text, out r)) {
+                    ChangeSimulation(element, r);
+                }
             }
-            else if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals('\b') && ((TextBox)element).Text.Length != 0) { // If the user input isn't a number then remove it
+            else if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals('\b')) { // If the user input isn't a number then remove it
                 ((TextBox)element).Text = ((TextBox)element).Text.Substring(0, ((TextBox)element).Text.Length - 1);
             }
         }
 
-        private void ChangeSimulation(int o, int target) {
+        private void ChangeSimulation(UIElement box, int target) {
 
+            Debug.WriteLine(box.AccessKey);
         }
     }
 }

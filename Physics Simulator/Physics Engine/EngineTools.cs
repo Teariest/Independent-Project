@@ -96,7 +96,6 @@ namespace Physics_Simulator {
         private void CalcScalar() {
             xVal = mag * Math.Cos(angle);
             yVal = mag * Math.Sin(angle);
-            Debug.WriteLine("M: " + mag + " A: " + angle + " x: " + xVal + " yVal: " + yVal);
         }
 
         /// <summary>
