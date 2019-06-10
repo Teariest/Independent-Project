@@ -52,6 +52,27 @@ namespace Physics_Simulator {
             this.y = y;
         }
 
+        public void EditValue(int valueID, double value) {
+
+            switch (valueID) {
+                case 0:
+                    x = value;
+                    break;
+                case 1:
+                    y = value;
+                    break;
+                case 2:
+                    r = value;
+                    break;
+                case 3:
+                    m = value;
+                    break;
+                case 4:
+                    e = value;
+                    break;
+            }
+        }
+
         public double GetXPos() { return x; }
         public double GetYPos() { return y; }
         public double GetRadius() { return r; }
@@ -131,6 +152,24 @@ namespace Physics_Simulator {
             xVal = -xVal;
             yVal = -yVal;
             angle += angle > 0 ? -Math.PI : Math.PI;
+        }
+
+        public void EditValue(int valueID, double value) {
+
+            switch (valueID) {
+                case 5:
+                    xVal = value;
+                    break;
+                case 6:
+                    yVal = value;
+                    break;
+                case 7:
+                    mag = value;
+                    break;
+                case 8:
+                    angle = value;
+                    break;
+            }
         }
 
         public double getXValue() { return xVal; }

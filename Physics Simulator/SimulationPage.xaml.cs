@@ -256,7 +256,7 @@ namespace Physics_Simulator {
                         int target; // targeted value ID of taret object from xml
 
                         // If the target tag's content from the xml is not valid then throw an exception
-                        if ((!int.TryParse(n.children.ElementAt(i).content, out target)) || target > 13) {
+                        if ((!int.TryParse(n.children.ElementAt(i).content, out target)) || target > 8) {
                             throw new InvalidDataException("XML format error: <target>" + n.children.ElementAt(i).content + "</target>. " + n.children.ElementAt(i).content + " is not a valid target.");
                         }
 
@@ -266,7 +266,9 @@ namespace Physics_Simulator {
                         TextBox b = new TextBox();
                         b.Width = 80; // set width of box to 80 pixels
                         b.CharacterReceived += TextBoxHandler; // call handler when new character is received
-                        b.AccessKey += objectID; // add objectID # to box access key, access key is like a name for the textbox
+                        // add objectID # to box access key, to the left of the '|' the integer is the objectID,
+                        //to the right it is the target value, access key is like a name for the textbox
+                        b.AccessKey += objectID + "|" + target;
 
                         SimStackPanel.Children.Add(b);
                     }
@@ -317,9 +319,9 @@ namespace Physics_Simulator {
             if (((TextBox)element).Text.Length == 0) { return; } // if nothing is entered, don't do anything
 
             if (argument.Character.GetHashCode() == 851981) { // If user presses enter into the textbox
-                int r;
-                if (int.TryParse(((TextBox)element).Text, out r)) {
-                    ChangeSimulation(element, r);
+                double value;
+                if (double.TryParse(((TextBox)element).Text, out value)) {
+                    ChangeSimulation(element, value);
                 }
             }
             else if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals('\b')) { // If the user input isn't a number then remove it
@@ -327,9 +329,34 @@ namespace Physics_Simulator {
             }
         }
 
-        private void ChangeSimulation(UIElement box, int target) {
+        // Changes simulation data given UI Element user interacted with and it's value.
+        private void ChangeSimulation(UIElement box, double value) {
 
+            /* 0:x
+             * 1:y
+             * 2:r
+             * 3:mass
+             * 4:e
+             * 5:vx
+             * 6:vy
+             * 7:mag
+             * 8:angle
+            */
+
+            int splitIndex = box.AccessKey.IndexOf('|');
             Debug.WriteLine(box.AccessKey);
+            Debug.WriteLine(box.AccessKey.Substring(0, splitIndex));
+            Debug.WriteLine(box.AccessKey.Substring(splitIndex));
+            Debug.WriteLine(splitIndex);
+            int objectID = int.Parse(box.AccessKey.Substring(0, splitIndex));
+            int targetID = int.Parse(box.AccessKey.Substring(++splitIndex));
+            
+            if (targetID < 5) {
+                eObjects[objectID].EditValue(targetID, value);
+            }
+            else {
+                vectors[objectID].EditValue(targetID, value);
+            }
         }
     }
 }
