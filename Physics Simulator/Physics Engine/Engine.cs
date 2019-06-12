@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Media.Playback;
 
 namespace Physics_Simulator {
     
@@ -84,6 +85,9 @@ namespace Physics_Simulator {
                         
                         rebound[i].Add((minDist - Math.Sqrt(distSqrd))/2, rAngle, 0, 0);
                         
+                        if (HUB.collisionSounds) {
+                            HUB.collisionPlayer.Play();
+                        }
                     }
                 }
             }

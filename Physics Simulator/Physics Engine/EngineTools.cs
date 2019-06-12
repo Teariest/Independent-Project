@@ -13,11 +13,11 @@ namespace Physics_Simulator {
 
     class EngineCircle {
 
-        private double x; // Left side's position from left of canvas in p
-        private double y; // Top side's position from top of canvas in p
-        private double r; // Radius
-        private double m; // Mass
-        private double e; // coefficient of elasticity
+        public double x; // Left side's position from left of canvas in p
+        public double y; // Top side's position from top of canvas in p
+        public double r; // Radius
+        public double m; // Mass
+        public double e; // coefficient of elasticity
 
         public EngineCircle(double posX, double posY, double radius, double mass, double elasticity) {
 
@@ -52,27 +52,6 @@ namespace Physics_Simulator {
             this.y = y;
         }
 
-        public void EditValue(int valueID, double value) {
-
-            switch (valueID) {
-                case 0:
-                    x = value;
-                    break;
-                case 1:
-                    y = value;
-                    break;
-                case 2:
-                    r = value;
-                    break;
-                case 3:
-                    m = value;
-                    break;
-                case 4:
-                    e = value;
-                    break;
-            }
-        }
-
         public double GetXPos() { return x; }
         public double GetYPos() { return y; }
         public double GetRadius() { return r; }
@@ -85,10 +64,10 @@ namespace Physics_Simulator {
     /// </summary>
     class Vector {
 
-        double angle;
-        double mag;
-        double xVal;
-        double yVal;
+        public double angle;
+        public double mag;
+        public double xVal;
+        public double yVal;
 
         /// <summary>
         /// Setup Vector, if either magnitude/angle OR x/y are set to 0 they will be ignored and vector will be calculate via the other set of variables
@@ -152,24 +131,6 @@ namespace Physics_Simulator {
             xVal = -xVal;
             yVal = -yVal;
             angle += angle > 0 ? -Math.PI : Math.PI;
-        }
-
-        public void EditValue(int valueID, double value) {
-
-            switch (valueID) {
-                case 5:
-                    xVal = value;
-                    break;
-                case 6:
-                    yVal = value;
-                    break;
-                case 7:
-                    mag = value;
-                    break;
-                case 8:
-                    angle = value;
-                    break;
-            }
         }
 
         public double getXValue() { return xVal; }

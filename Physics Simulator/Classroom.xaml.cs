@@ -88,14 +88,13 @@ namespace Physics_Simulator {
                 else { BLA(); }
                 PrevSelect = 4;
             }
-            /*
+            
             else if (MenuItem5.IsSelected || (reset && PrevSelect == 5)) {
                 HUB.config = 5;
                 if (HUB.usingPreBuiltLessons) LessonFrame.Navigate(typeof(Lesson5));
                 else { BLA(); }
                 PrevSelect = 5;
             }
-            */
         }
     }
 }

@@ -23,7 +23,7 @@
             <TextBlock Canvas.Left="1000" Canvas.Top="500" Text="1 Elasticity" TextWrapping="Wrap"/>
             -->
         </Canvas>
-        <StackPanel Grid.Column="1" x:Name="SimStackPanel" Orientation="Vertical" Width="80">
+        <StackPanel Grid.Column="1" x:Name="SimStackPanel" Orientation="Vertical" Width="100">
             
         </StackPanel>
     </Grid>

@@ -49,15 +49,13 @@
                         <TextBlock Style="{StaticResource MenuTextStyle}" Text="Forces"/>
                     </StackPanel>
                 </ListBoxItem>
-                
-                <!--
+
                 <ListBoxItem Name="MenuItem5" Style="{StaticResource MenuListBoxItem}">
                     <StackPanel Style="{StaticResource MenuStackPanelStyle}">
                         <TextBlock Style="{StaticResource MenuIconStyle}" Text="&#xE768;"/>
-                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Colisions"/>
+                        <TextBlock Style="{StaticResource MenuTextStyle}" Text="Free Sim"/>
                     </StackPanel>
                 </ListBoxItem>
-                -->
 
             </ListBox>
         </SplitView.Pane>

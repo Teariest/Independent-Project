@@ -40,6 +40,7 @@ namespace Physics_Simulator {
         private DispatcherTimer timer; // Timer that requests engine to calculate and move objects at every interval
         private DispatcherTimer resetTimer; // Timer to reset engine
         private int resetTime = 7; // Reset interval in seconds
+        private bool reset = true;
 
         // User Editing
         private int[][] targets;
@@ -66,7 +67,9 @@ namespace Physics_Simulator {
             resetTimer = new DispatcherTimer();
             resetTimer.Tick += Reset;
             resetTimer.Interval = new TimeSpan(0, 0, 0, resetTime);
-            resetTimer.Start();
+            if (resetTime != 0) {
+                resetTimer.Start();
+            }
         }
 
         // Build the Sim but not the timing elements, root build method, can be used from any point
@@ -91,13 +94,18 @@ namespace Physics_Simulator {
         // Re-builds the entire simulation, gets called by dispatcher
         private void Reset(object sender, object e) {
             
+            if (reset == false && resetTime != 0) { // re-launch the reset sequence
+                reset = true;
+                resetTimer.Tick += Reset;
+                resetTimer.Start();
+            }
             SimCanvas.Children.Clear();
             Build();
         }
 
         private void RefreshDisplay() {
             EngineCircle[] pos = simEngine.Positions(); // retrieve all object positions from the engine
-
+            
             for (int i = 0; i < pos.Length; i++) { // Display all object positions
                 UIObjects[i].SetValue(Canvas.LeftProperty, (pos[i].GetXPos() - pos[i].GetRadius()) * 10);
                 UIObjects[i].SetValue(Canvas.TopProperty, (pos[i].GetYPos() - pos[i].GetRadius()) * 10);
@@ -264,11 +272,41 @@ namespace Physics_Simulator {
 
                         // Setup the TextBox user will input values into
                         TextBox b = new TextBox();
-                        b.Width = 80; // set width of box to 80 pixels
+                        b.Width = 100; // set width of box to 80 pixels
                         b.CharacterReceived += TextBoxHandler; // call handler when new character is received
                         // add objectID # to box access key, to the left of the '|' the integer is the objectID,
                         //to the right it is the target value, access key is like a name for the textbox
                         b.AccessKey += objectID + "|" + target;
+
+                        switch(target) {
+                            case 0:
+                                b.PlaceholderText = "x pos";
+                                break;
+                            case 1:
+                                b.PlaceholderText = "y pos";
+                                break;
+                            case 2:
+                                b.PlaceholderText = "radius";
+                                break;
+                            case 3:
+                                b.PlaceholderText = "mass";
+                                break;
+                            case 4:
+                                b.PlaceholderText = "elasticiy";
+                                break;
+                            case 5:
+                                b.PlaceholderText = "x velocity";
+                                break;
+                            case 6:
+                                b.PlaceholderText = "y velocity";
+                                break;
+                            case 7:
+                                b.PlaceholderText = "velocity";
+                                break;
+                            case 8:
+                                b.PlaceholderText = "direction";
+                                break;
+                        }
 
                         SimStackPanel.Children.Add(b);
                     }
@@ -283,7 +321,7 @@ namespace Physics_Simulator {
 
             Button resetB = new Button();
             resetB.Content = "Reset";
-            resetB.Width = 80;
+            resetB.Width = 100;
             resetB.Click += Reset;
             SimStackPanel.Children.Add(resetB);
         }
@@ -324,7 +362,7 @@ namespace Physics_Simulator {
                     ChangeSimulation(element, value);
                 }
             }
-            else if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals('\b')) { // If the user input isn't a number then remove it
+            else if (!Char.IsNumber(argument.Character) && !argument.Character.Equals('.') && !argument.Character.Equals('\b') && !argument.Character.Equals('-')) { // If the user input isn't a number then remove it
                 ((TextBox)element).Text = ((TextBox)element).Text.Substring(0, ((TextBox)element).Text.Length - 1);
             }
         }
@@ -343,19 +381,49 @@ namespace Physics_Simulator {
              * 8:angle
             */
 
+            if (reset == true) { // stop auto-reset
+                reset = false;
+                resetTimer.Tick -= Reset;
+                resetTimer.Stop();
+            }
+
             int splitIndex = box.AccessKey.IndexOf('|');
-            Debug.WriteLine(box.AccessKey);
-            Debug.WriteLine(box.AccessKey.Substring(0, splitIndex));
-            Debug.WriteLine(box.AccessKey.Substring(splitIndex));
-            Debug.WriteLine(splitIndex);
             int objectID = int.Parse(box.AccessKey.Substring(0, splitIndex));
             int targetID = int.Parse(box.AccessKey.Substring(++splitIndex));
             
-            if (targetID < 5) {
-                eObjects[objectID].EditValue(targetID, value);
-            }
-            else {
-                vectors[objectID].EditValue(targetID, value);
+            switch (targetID) {
+                case 0: // x pos
+                    eObjects[objectID].x = value;
+                    break;
+                case 1: // y pos
+                    eObjects[objectID].y = value;
+                    break;
+                case 2: // radius
+                    value *= 20;
+                    eObjects[objectID].r = value;
+                    UIObjects[objectID].Height = value;
+                    UIObjects[objectID].Width = value;
+                    eObjects[objectID].x -= value * 10;
+                    eObjects[objectID].y -= value * 10;
+                    break;
+                case 3: // mass
+                    eObjects[objectID].m = value;
+                    break;
+                case 4: // elasticity
+                    eObjects[objectID].e = value;
+                    break;
+                case 5: // x vector
+                    vectors[objectID].xVal = value;
+                    break;
+                case 6: // y vector
+                    vectors[objectID].yVal = value;
+                    break;
+                case 7: // magnitude
+                    vectors[objectID].mag = value;
+                    break;
+                case 8: // angle
+                    vectors[objectID].angle = value;
+                    break;
             }
         }
     }

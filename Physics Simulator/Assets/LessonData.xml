@@ -39,13 +39,8 @@
             <objectID>0</objectID>
             <target>0</target>
             <target>1</target>
-            <target>2</target>
-            <target>3</target>
-            <target>4</target>
             <target>5</target>
             <target>6</target>
-            <target>7</target>
-            <target>8</target>
           </Object>
         </UserEdit>
       </Simulation>
@@ -274,9 +269,89 @@
     </Content>
   </Lesson>
   <Lesson>
-    <Title>Forces</Title>
-    <Content>
-      <Block></Block>
-    </Content>
+    <Title>Simulator</Title>
+    <SimulationData>
+      <Simulation>
+        <fps>60</fps>
+        <g>0</g>
+        <gAd>0</gAd>
+        <r>0</r>
+        <ObjectData>
+          <Object>
+            <x>10</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>255</r>
+              <g>000</g>
+              <b>000</b>
+            </Color>
+            <Velocity>
+              <x>0</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
+          <Object>
+            <x>50</x>
+            <y>10</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>000</r>
+              <g>255</g>
+              <b>000</b>
+            </Color>
+            <Velocity>
+              <x>0</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
+        <Object>
+            <x>25</x>
+            <y>25</y>
+            <r>2</r>
+            <m>1</m>
+            <e>1</e>
+            <Color>
+              <a>255</a>
+              <r>000</r>
+              <g>000</g>
+              <b>255</b>
+            </Color>
+            <Velocity>
+              <x>0</x>
+              <y>0</y>
+              <m>0</m>
+              <a>0</a>
+            </Velocity>
+          </Object>
+        </ObjectData>
+        <UserEdit>
+          <Object>
+            <objectID>0</objectID>
+            <target>0</target>
+            <target>1</target>
+            <target>5</target>
+            <target>6</target>
+          </Object>
+          <Object>
+            <objectID>2</objectID>
+            <target>0</target>
+            <target>1</target>
+            <target>5</target>
+            <target>6</target>
+          </Object>
+        </UserEdit>
+      </Simulation>
+    </SimulationData>
   </Lesson>
 </ClassroomData>
