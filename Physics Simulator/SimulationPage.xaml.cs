@@ -20,6 +20,7 @@ using Physics_Simulator.ViewModel;
 namespace Physics_Simulator {
 
     public sealed partial class SimulationPage : Page {
+
         // Physics Engine
         private Engine simEngine;
 
